@@ -93,6 +93,18 @@ a {
     text-decoration: none;
 }
 
+/* Global Responsive Utilities */
+.show-mobile {
+    display: none;
+}
+.hide-mobile {
+    display: inline;
+}
+
+.portrait-arc {
+    display: none;
+}
+
 /* ==========================================================================
    AMBIENT GLOWING BACKGROUND
    ========================================================================== */
@@ -2287,9 +2299,20 @@ section {
     .interest-accordion-item {
         flex: none !important;
         width: 100% !important;
-        height: auto !important;
         border-radius: 20px !important;
         cursor: default !important;
+
+        /* Mobile Collapsed State Height */
+        max-height: 90px !important;
+        transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease !important;
+        overflow: hidden !important;
+    }
+
+    .interest-accordion-item.active {
+        max-height: 300px !important;
+        background: rgba(14, 14, 22, 0.82) !important;
+        border-color: rgba(79, 59, 235, 0.5) !important;
+        box-shadow: var(--shadow-premium), var(--glow-violet) !important;
     }
 
     .interest-accordion-content {
@@ -2297,6 +2320,10 @@ section {
         align-items: flex-start !important;
         gap: 15px !important;
         padding: 24px !important;
+    }
+
+    .interest-accordion-item:not(.active) .interest-accordion-content {
+        padding: 16px 24px !important;
     }
 
     .interest-icon-side {
@@ -2317,16 +2344,38 @@ section {
     }
 
     .interest-details {
-        opacity: 1 !important;
-        transform: none !important;
-        pointer-events: auto !important;
         width: 100% !important;
     }
 
-    .interest-details>* {
+    .interest-accordion-item:not(.active) .interest-details {
+        gap: 0 !important;
+    }
+
+    .interest-accordion-item:not(.active) .interest-details h3 {
         opacity: 1 !important;
         transform: none !important;
-        transition: none !important;
+        pointer-events: auto !important;
+        transition: opacity 0.4s ease, transform 0.4s ease !important;
+    }
+
+    /* Hide descriptions on collapsed mobile interest cards */
+    .interest-accordion-item:not(.active) .interest-details p {
+        opacity: 0 !important;
+        transform: translateY(20px) !important;
+        pointer-events: none !important;
+        height: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+        transition: opacity 0.4s ease, transform 0.4s ease, height 0.4s ease, margin 0.4s ease !important;
+    }
+
+    /* Reveal description on scroll active mobile interest cards */
+    .interest-accordion-item.active .interest-details p {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        pointer-events: auto !important;
+        height: auto !important;
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
 
     /* Make background image full-width with low opacity for premium card texture */
@@ -2689,13 +2738,25 @@ section {
         pointer-events: auto !important;
         flex: none !important;
         width: 100% !important;
-        height: auto !important;
         margin: 0 0 20px 0 !important;
         border: 1px solid var(--border-glass) !important;
         border-radius: 24px !important;
         cursor: default !important;
         background: rgba(18, 18, 26, 0.55) !important;
         box-shadow: var(--shadow-premium) !important;
+        
+        /* Mobile Collapsed State Height */
+        max-height: 90px !important;
+        transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease !important;
+        overflow: hidden !important;
+    }
+
+    .accordion-item.active,
+    .accordion-item.hidden-card.active {
+        max-height: 480px !important;
+        background: rgba(14, 14, 22, 0.82) !important;
+        border-color: rgba(79, 59, 235, 0.5) !important;
+        box-shadow: var(--shadow-premium), var(--glow-violet) !important;
     }
 
     .projects-accordion {
@@ -2709,6 +2770,10 @@ section {
         align-items: flex-start !important;
         gap: 20px !important;
         padding: 24px !important;
+    }
+
+    .accordion-item:not(.active) .accordion-content {
+        padding: 16px 24px !important;
     }
 
     .accordion-header-side {
@@ -2731,16 +2796,42 @@ section {
     }
 
     .accordion-details {
-        opacity: 1 !important;
-        transform: none !important;
-        pointer-events: auto !important;
         width: 100% !important;
     }
 
-    .accordion-details>* {
+    .accordion-item:not(.active) .accordion-details {
+        gap: 0 !important;
+    }
+
+    .accordion-item:not(.active) .accordion-details h3 {
         opacity: 1 !important;
         transform: none !important;
-        transition: none !important;
+        pointer-events: auto !important;
+        transition: opacity 0.4s ease, transform 0.4s ease !important;
+    }
+
+    /* Hide descriptions, tags, and links on collapsed mobile project cards */
+    .accordion-item:not(.active) .accordion-details p,
+    .accordion-item:not(.active) .accordion-details .project-tech,
+    .accordion-item:not(.active) .accordion-details .project-links {
+        opacity: 0 !important;
+        transform: translateY(20px) !important;
+        pointer-events: none !important;
+        height: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+        transition: opacity 0.4s ease, transform 0.4s ease, height 0.4s ease, margin 0.4s ease !important;
+    }
+
+    /* Reveal details on scroll active mobile project cards */
+    .accordion-item.active .accordion-details p,
+    .accordion-item.active .accordion-details .project-tech,
+    .accordion-item.active .accordion-details .project-links {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        pointer-events: auto !important;
+        height: auto !important;
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
 
     .project-badge {
@@ -3336,38 +3427,38 @@ section {
     }
 
     .hero {
-        height: 100vh !important;
-        height: 100dvh !important;
-        min-height: 600px !important;
-        padding: 0 !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        min-height: 100dvh !important;
+        padding: 80px 0 50px !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
-        justify-content: center !important;
+        justify-content: flex-start !important;
     }
 
     /* Redesigned Mobile Hero Section */
     .hero-container {
         flex-direction: column !important;
-        justify-content: space-between !important;
+        justify-content: flex-start !important;
         align-items: center !important;
-        height: 100% !important;
+        height: auto !important;
         width: 100% !important;
-        padding: 72px 24px 0 !important;
+        padding: 0 24px !important;
         position: relative !important;
         gap: 0 !important;
     }
 
     .hero-portrait-layer {
-        position: absolute !important;
-        top: clamp(60px, 8vh, 80px) !important;
+        position: relative !important;
+        top: auto !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
         width: 100% !important;
-        height: 38vh !important;
-        max-height: 280px !important;
-        min-height: 200px !important;
-        margin: 0 auto !important;
+        height: 60vh !important;
+        max-height: 480px !important;
+        min-height: 320px !important;
+        margin: 10px auto 10px !important;
         order: 1 !important;
         display: flex !important;
         justify-content: center !important;
@@ -3382,7 +3473,7 @@ section {
         position: relative !important;
         width: 100% !important;
         height: 100% !important;
-        max-width: 280px !important;
+        max-width: 420px !important;
         display: flex !important;
         justify-content: center !important;
         align-items: flex-end !important;
@@ -3400,7 +3491,7 @@ section {
         border-radius: 0 !important;
         mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 95%) !important;
         -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 95%) !important;
-        scale: 1.15 !important;
+        scale: 1.3 !important;
         transform: none !important;
         animation: none !important;
         opacity: 1 !important;
@@ -3408,8 +3499,8 @@ section {
 
     .portrait-glow {
         position: absolute !important;
-        width: 220px !important;
-        height: 220px !important;
+        width: 300px !important;
+        height: 300px !important;
         border-radius: 50% !important;
         background: radial-gradient(circle, rgba(0, 86, 255, 0.25) 0%, rgba(0, 43, 128, 0.05) 70%, transparent 100%) !important;
         border: 2px solid rgba(0, 86, 255, 0.6) !important;
@@ -3421,6 +3512,32 @@ section {
         animation: floatGlow 8s ease-in-out infinite alternate !important;
     }
 
+    .portrait-arc {
+        display: block !important;
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        border: 2px solid transparent;
+        background:
+            linear-gradient(rgba(3,3,5,0), rgba(3,3,5,0)) padding-box,
+            linear-gradient(
+                160deg,
+                rgba(0, 100, 255, 0.45) 0%,
+                rgba(0, 50, 180, 0.28) 30%,
+                rgba(0, 25, 120, 0.12) 55%,
+                transparent 75%
+            ) border-box;
+        box-shadow:
+            0 0 24px rgba(0, 86, 255, 0.1),
+            inset 0 0 24px rgba(0, 86, 255, 0.05);
+        z-index: 1;
+        pointer-events: none;
+    }
+
     .hero-left-content {
         position: relative !important;
         z-index: 3 !important;
@@ -3428,8 +3545,8 @@ section {
         text-align: center !important;
         align-items: center !important;
         order: 2 !important;
-        margin-top: clamp(150px, 30vh, 220px) !important;
-        margin-bottom: auto !important;
+        margin-top: 10px !important;
+        margin-bottom: 30px !important;
         padding: 0 10px !important;
         display: flex !important;
         flex-direction: column !important;
@@ -3439,6 +3556,13 @@ section {
     }
 
     .hero-right-content {
+        display: none !important;
+    }
+
+    .show-mobile {
+        display: inline !important;
+    }
+    .hide-mobile {
         display: none !important;
     }
 
@@ -3469,7 +3593,7 @@ section {
         transform: none !important;
     }
     .name-first {
-        display: block !important;
+        display: inline-block !important;
         color: var(--color-electric-blue) !important;
         text-shadow: 0 0 30px rgba(0, 86, 255, 0.4) !important;
         animation: none !important;
@@ -3477,7 +3601,7 @@ section {
         transform: none !important;
     }
     .name-last {
-        display: block !important;
+        display: inline-block !important;
         font-size: 48px !important;
         color: #ffffff !important;
         animation: none !important;
@@ -3523,10 +3647,10 @@ section {
     }
 
     .hero-description-text {
-        font-size: 13px !important;
-        line-height: 1.5 !important;
-        color: rgba(255, 255, 255, 0.65) !important;
-        max-width: 280px !important;
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+        color: rgba(255, 255, 255, 0.72) !important;
+        max-width: 330px !important;
         margin: 4px auto 0 !important;
         text-align: center !important;
         animation: none !important;
@@ -3538,9 +3662,9 @@ section {
         display: flex !important;
         flex-direction: column !important;
         width: 100% !important;
-        max-width: 280px !important;
+        max-width: 330px !important;
         gap: 10px !important;
-        margin-top: 20px !important;
+        margin-top: 24px !important;
         animation: none !important;
         opacity: 1 !important;
         transform: none !important;
@@ -3551,8 +3675,8 @@ section {
         width: 100% !important;
         justify-content: center !important;
         align-items: center !important;
-        padding: 12px 24px !important;
-        border-radius: 100px !important;
+        padding: 14px 28px !important;
+        border-radius: 14px !important;
         font-family: var(--font-body) !important;
         font-size: 13px !important;
         font-weight: 600 !important;
@@ -3644,20 +3768,31 @@ section {
     }
 
     .hero-container {
-        padding-top: 60px;
-        gap: 15px;
+        padding: 0 16px !important;
+        gap: 0 !important;
     }
 
     .hero-portrait-layer {
-        height: 280px;
+        height: 50vh !important;
+        max-height: 380px !important;
+        min-height: 270px !important;
+        margin: 5px auto 10px !important;
     }
     .portrait-wrapper {
-        max-width: 280px;
-        height: 280px;
+        max-width: 320px !important;
+        height: 100% !important;
     }
     .portrait-glow {
-        width: 210px;
-        height: 210px;
+        width: 250px !important;
+        height: 250px !important;
+    }
+    .portrait-arc {
+        width: 250px !important;
+        height: 250px !important;
+    }
+    .hero-left-content {
+        margin-top: 5px !important;
+        margin-bottom: 20px !important;
     }
 
     .hero-greeting {

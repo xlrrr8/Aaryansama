@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initInterestsAccordion(); // Initialize interests expanding cards swiper!
     initScrollVideo(); // Scroll-driven video background
     initRotatingText(); // Fade-reveal rotating tagline
-    
+    initMobileScrollAccordion(); // Initialize scrolling vertical card maximization on mobile!
 });
 
 /* ==========================================================================
@@ -482,18 +482,63 @@ function initScrollParallax() {
     // GSAP HERO PARALLAX ANIMATION LAYERS (Linked to Lenis Inertial Scroll)
     // ==========================================================================
 
-    // Layer 1: Background Typography ("PORTFOLIO") Outer Wrapper
-    gsap.to('.hero-bg-heading-wrapper', {
-        scrollTrigger: {
-            trigger: '#hero',
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1.2, // Delicate lag for elegant kinetic inertia
-        },
-        yPercent: -20,      // Shifts upwards slowly
-        xPercent: -15,      // Kinetic horizontal drift to the left
-        opacity: 0.08,      // Smooth fade out as it exits
-        ease: 'none'
+    let mm = gsap.matchMedia();
+
+    // Desktop only scroll animations (screen width > 768px)
+    mm.add("(min-width: 769px)", () => {
+        // Layer 1: Background Typography ("PORTFOLIO") Outer Wrapper
+        gsap.to('.hero-bg-heading-wrapper', {
+            scrollTrigger: {
+                trigger: '#hero',
+                start: 'top top',
+                end: 'bottom top',
+                scrub: 1.2, // Delicate lag for elegant kinetic inertia
+            },
+            yPercent: -20,      // Shifts upwards slowly
+            xPercent: -15,      // Kinetic horizontal drift to the left
+            opacity: 0.08,      // Smooth fade out as it exits
+            ease: 'none'
+        });
+
+        // Layer 2: Central Portrait Image
+        gsap.to('.portrait-wrapper', {
+            scrollTrigger: {
+                trigger: '#hero',
+                start: 'top top',
+                end: 'bottom top',
+                scrub: 1.2,
+            },
+            yPercent: 12,       // Moves slower than scroll speed for distinct layering depth
+            scale: 0.92,        // Gracefully scales down
+            opacity: 0.05,      // Fades out near exit
+            ease: 'none'
+        });
+
+        // Layer 3: Foreground Text & UI (Left typographic columns & Right stacked role)
+        gsap.to(['.hero-left-content', '.hero-right-content'], {
+            scrollTrigger: {
+                trigger: '#hero',
+                start: 'top top',
+                end: '45% top',
+                scrub: 1.0,
+            },
+            yPercent: -35,      // Slides upwards faster than viewport speed
+            opacity: 0,         // Rapidly fades out
+            ease: 'none'
+        });
+
+        // Scroll Down Hint Indicator
+        gsap.to('.scroll-down-hint', {
+            scrollTrigger: {
+                trigger: '#hero',
+                start: 'top top',
+                end: '20% top',
+                scrub: 1.0,
+            },
+            yPercent: -15,
+            opacity: 0,
+            ease: 'none'
+        });
     });
 
     // Kinetic Page-Load Slide-In and Interactive Mouse-Parallax
@@ -521,6 +566,7 @@ function initScrollParallax() {
         // 2. Mousemove Parallax: Link to cursor coordinates for immersive depth
         window.addEventListener('mousemove', (e) => {
             if (!isLoaded) return;
+            if (window.innerWidth <= 768) return; // Ignore on mobile
 
             // Calculate offset percentage from center (-0.5 to 0.5)
             const xPercent = (e.clientX / window.innerWidth) - 0.5;
@@ -540,45 +586,6 @@ function initScrollParallax() {
         });
     }
 
-    // Layer 2: Central Portrait Image
-    gsap.to('.portrait-wrapper', {
-        scrollTrigger: {
-            trigger: '#hero',
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1.2,
-        },
-        yPercent: 12,       // Moves slower than scroll speed for distinct layering depth
-        scale: 0.92,        // Gracefully scales down
-        opacity: 0.05,      // Fades out near exit
-        ease: 'none'
-    });
-
-    // Layer 3: Foreground Text & UI (Left typographic columns & Right stacked role)
-    gsap.to(['.hero-left-content', '.hero-right-content'], {
-        scrollTrigger: {
-            trigger: '#hero',
-            start: 'top top',
-            end: '45% top',
-            scrub: 1.0,
-        },
-        yPercent: -35,      // Slides upwards faster than viewport speed
-        opacity: 0,         // Rapidly fades out
-        ease: 'none'
-    });
-
-    // Scroll Down Hint Indicator
-    gsap.to('.scroll-down-hint', {
-        scrollTrigger: {
-            trigger: '#hero',
-            start: 'top top',
-            end: '20% top',
-            scrub: 1.0,
-        },
-        yPercent: -15,
-        opacity: 0,
-        ease: 'none'
-    });
     // ==========================================================================
     // GSAP ABOUT SECTION PARALLAX ANIMATION LAYERS (Matching Hero Parallax)
     // ==========================================================================
@@ -981,3 +988,80 @@ function initRotatingText() {
         currentIndex = nextIndex;
     }, interval);
 }
+
+/* ==========================================================================
+   MOBILE VERTICAL SCROLL ACCORDION MAXIMIZER
+   ========================================================================== */
+function initMobileScrollAccordion() {
+    const projectItems = document.querySelectorAll('.accordion-item');
+    const interestItems = document.querySelectorAll('.interest-accordion-item');
+
+    const handleScroll = () => {
+        if (window.innerWidth > 820) return;
+
+        const viewportCenter = window.innerHeight / 2;
+
+        // 1. Projects Accordion scroll trigger
+        let closestProject = null;
+        let minProjectDist = Infinity;
+
+        projectItems.forEach(item => {
+            const rect = item.getBoundingClientRect();
+            // Use a stable collapsed center offset (45px) to prevent height expansion from biasing detection center
+            const itemCenter = rect.top + 45;
+            const dist = Math.abs(viewportCenter - itemCenter);
+
+            if (dist < minProjectDist) {
+                minProjectDist = dist;
+                closestProject = item;
+            }
+        });
+
+        if (closestProject) {
+            projectItems.forEach(item => {
+                if (item === closestProject) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        // 2. Interests Accordion scroll trigger
+        let closestInterest = null;
+        let minInterestDist = Infinity;
+
+        interestItems.forEach(item => {
+            const rect = item.getBoundingClientRect();
+            // Use a stable collapsed center offset (45px) to prevent height expansion from biasing detection center
+            const itemCenter = rect.top + 45;
+            const dist = Math.abs(viewportCenter - itemCenter);
+
+            if (dist < minInterestDist) {
+                minInterestDist = dist;
+                closestInterest = item;
+            }
+        });
+
+        if (closestInterest) {
+            interestItems.forEach(item => {
+                if (item === closestInterest) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+    };
+
+    // Integrate with Lenis scroll event if available, otherwise fallback to standard scroll
+    if (typeof lenis !== 'undefined' && lenis) {
+        lenis.on('scroll', handleScroll);
+    } else {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+    }
+
+    // Trigger once initially to set correct state
+    setTimeout(handleScroll, 100);
+}
+
