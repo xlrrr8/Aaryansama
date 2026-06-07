@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Aaryan Ningdhalli (Sama) - Portfolio. UI/UX Designer, Web Developer & AI/ML Engineer. Specialize in designing modern high-impact digital experiences.">
+    <meta name="keywords"
+        content="Aaryan Sama, Aaryan Ningdhalli, UI/UX Designer, Web Designer, AI/ML, Portfolio, Front-end Developer, Hyderabad">
+    <title>Aaryan Sama | UI/UX & Web Designer</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts: Outfit for sleek geometric headings, Inter for high readability body -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Premium Iconography -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Ambient Glowing Spheres Background -->
+    <div class="ambient-bg">
+        <!-- Scroll-Driven Video Background -->
+        <div class="bg-video-wrapper">
+            <video id="bg-video" class="bg-video" src="bg-video.mp4" muted playsinline preload="auto"></video>
+        </div>
+        <!-- Pinterest-Inspired Organic Gradient Blobs -->
+        <div class="pinterest-blobs-layer">
+            <div class="pinterest-blob blob-peach"></div>
+            <div class="pinterest-blob blob-amber"></div>
+            <div class="pinterest-blob blob-plum"></div>
+            <div class="pinterest-blob blob-slate"></div>
+        </div>
+
+        <!-- Designer Drafting Dot Grid Pattern -->
+        <div class="pinterest-dot-grid"></div>
+
+        <!-- Pinterest-Style Floating Passion Pins (Mood Board) -->
+        <div class="pinterest-mood-board">
+            <!-- Pin 1: Films -->
+            <div class="pinterest-pin pin-films" style="top: 18vh; left: 6%;">
+                <div class="pin-inner">
+                    <div class="pin-header">
+                        <span class="pin-dot"></span>
+                        <span class="pin-label">mood.01 // films</span>
+                    </div>
+                    <svg class="pin-svg" viewBox="0 0 100 120" fill="none" stroke="currentColor">
+                        <rect x="10" y="10" width="80" height="80" rx="6" stroke-width="1.2" opacity="0.6" />
+                        <circle cx="50" cy="50" r="24" stroke-width="1.2" />
+                        <circle cx="50" cy="50" r="8" stroke-dasharray="2,2" stroke-width="1" />
+                        <line x1="10" y1="98" x2="90" y2="98" stroke-width="1" opacity="0.4" />
+                        <rect x="15" y="15" width="6" height="8" rx="1" stroke-width="0.8" opacity="0.4" />
+                        <rect x="79" y="15" width="6" height="8" rx="1" stroke-width="0.8" opacity="0.4" />
+                        <rect x="15" y="77" width="6" height="8" rx="1" stroke-width="0.8" opacity="0.4" />
+                        <rect x="79" y="77" width="6" height="8" rx="1" stroke-width="0.8" opacity="0.4" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Pin 2: Poster Design -->
+            <div class="pinterest-pin pin-posters" style="top: 90vh; right: 8%;">
+                <div class="pin-inner">
+                    <div class="pin-header">
+                        <span class="pin-dot"></span>
+                        <span class="pin-label">design.02 // grid</span>
+                    </div>
+                    <svg class="pin-svg" viewBox="0 0 100 140" fill="none" stroke="currentColor">
+                        <rect x="10" y="10" width="80" height="120" rx="4" stroke-width="1.2" opacity="0.6" />
+                        <line x1="25" y1="10" x2="25" y2="130" stroke-width="0.8" stroke-dasharray="2,3"
+                            opacity="0.4" />
+                        <line x1="50" y1="10" x2="50" y2="130" stroke-width="0.8" stroke-dasharray="2,3"
+                            opacity="0.4" />
+                        <line x1="75" y1="10" x2="75" y2="130" stroke-width="0.8" stroke-dasharray="2,3"
+                            opacity="0.4" />
+                        <text x="32" y="45" font-family="'Outfit', sans-serif" font-weight="900" font-size="28"
+                            fill="currentColor" opacity="0.8">A</text>
+                        <text x="52" y="75" font-family="'Outfit', sans-serif" font-weight="300" font-size="22"
+                            fill="currentColor" opacity="0.6">S</text>
+                        <rect x="32" y="90" width="40" height="4" fill="currentColor" opacity="0.4" />
+                        <rect x="32" y="100" width="25" height="2" fill="currentColor" opacity="0.3" />
+                        <circle cx="25" cy="25" r="4" fill="currentColor" opacity="0.5" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Pin 3: Chess -->
+            <div class="pinterest-pin pin-chess" style="top: 165vh; left: 8%;">
+                <div class="pin-inner">
+                    <div class="pin-header">
+                        <span class="pin-dot"></span>
+                        <span class="pin-label">logic.03 // chess</span>
+                    </div>
+                    <svg class="pin-svg" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+                        <rect x="10" y="10" width="80" height="80" rx="3" stroke-width="1.2" opacity="0.6" />
+                        <line x1="30" y1="10" x2="30" y2="90" stroke-width="0.8" opacity="0.3" />
+                        <line x1="50" y1="10" x2="50" y2="90" stroke-width="0.8" opacity="0.3" />
+                        <line x1="70" y1="10" x2="70" y2="90" stroke-width="0.8" opacity="0.3" />
+                        <line x1="10" y1="30" x2="90" y2="30" stroke-width="0.8" opacity="0.3" />
+                        <line x1="10" y1="50" x2="90" y2="50" stroke-width="0.8" opacity="0.3" />
+                        <line x1="10" y1="70" x2="90" y2="70" stroke-width="0.8" opacity="0.3" />
+                        <circle cx="40" cy="40" r="5" stroke-width="1.2" fill="currentColor" opacity="0.8" />
+                        <circle cx="60" cy="60" r="5" stroke-width="1.2" />
+                        <circle cx="20" cy="20" r="3" stroke-width="1" fill="currentColor" opacity="0.8" />
+                        <circle cx="80" cy="80" r="3" stroke-width="1" />
+                        <path d="M 40 40 Q 50 20 80 80" stroke-width="1" stroke-dasharray="3,3" stroke="currentColor"
+                            opacity="0.5" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Pin 4: Literature -->
+            <div class="pinterest-pin pin-literature" style="top: 245vh; right: 6%;">
+                <div class="pin-inner">
+                    <div class="pin-header">
+                        <span class="pin-dot"></span>
+                        <span class="pin-label">lore.04 // books</span>
+                    </div>
+                    <svg class="pin-svg" viewBox="0 0 100 120" fill="none" stroke="currentColor">
+                        <path
+                            d="M 50 90 C 35 90 20 80 15 75 L 15 25 C 20 30 35 40 50 40 C 65 40 80 30 85 25 L 85 75 C 80 80 65 90 50 90 Z"
+                            stroke-width="1.2" opacity="0.6" />
+                        <line x1="50" y1="40" x2="50" y2="90" stroke-width="1.2" opacity="0.6" />
+                        <line x1="30" y1="18" x2="50" y2="8" stroke-width="0.8" stroke-dasharray="2,2" opacity="0.4" />
+                        <line x1="50" y1="8" x2="70" y2="15" stroke-width="0.8" stroke-dasharray="2,2" opacity="0.4" />
+                        <circle cx="30" cy="18" r="1.5" fill="currentColor" opacity="0.8" />
+                        <circle cx="50" cy="8" r="2.5" fill="currentColor" opacity="0.9" />
+                        <circle cx="70" cy="15" r="1.5" fill="currentColor" opacity="0.8" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Pin 5: Writing & Art -->
+            <div class="pinterest-pin pin-writing" style="top: 325vh; left: 7%;">
+                <div class="pin-inner">
+                    <div class="pin-header">
+                        <span class="pin-dot"></span>
+                        <span class="pin-label">art.05 // comedy</span>
+                    </div>
+                    <svg class="pin-svg" viewBox="0 0 100 130" fill="none" stroke="currentColor">
+                        <path d="M 10 100 Q 30 20 50 80 T 90 40" stroke-width="1.2" stroke-linecap="round" />
+                        <rect x="44" y="30" width="12" height="20" rx="6" stroke-width="1.2" opacity="0.8" />
+                        <line x1="44" y1="40" x2="56" y2="40" stroke-width="0.8" opacity="0.6" />
+                        <path d="M 40 40 C 40 52 60 52 60 40" stroke-width="1" opacity="0.8" />
+                        <line x1="50" y1="52" x2="50" y2="85" stroke-width="1.2" opacity="0.8" />
+                        <path d="M 35 85 L 65 85" stroke-width="1.2" opacity="0.8" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Pin 6: Web Dev -->
+            <div class="pinterest-pin pin-dev" style="top: 395vh; right: 9%;">
+                <div class="pin-inner">
+                    <div class="pin-header">
+                        <span class="pin-dot"></span>
+                        <span class="pin-label">code.06 // stack</span>
+                    </div>
+                    <svg class="pin-svg" viewBox="0 0 100 110" fill="none" stroke="currentColor">
+                        <rect x="10" y="10" width="80" height="90" rx="5" stroke-width="1.2" opacity="0.6" />
+                        <circle cx="20" cy="20" r="2" fill="currentColor" opacity="0.5" />
+                        <circle cx="28" cy="20" r="2" fill="currentColor" opacity="0.5" />
+                        <circle cx="36" cy="20" r="2" fill="currentColor" opacity="0.5" />
+                        <line x1="10" y1="30" x2="90" y2="30" stroke-width="1" opacity="0.4" />
+                        <line x1="50" y1="45" x2="30" y2="65" stroke-width="0.8" opacity="0.5" />
+                        <line x1="50" y1="45" x2="70" y2="65" stroke-width="0.8" opacity="0.5" />
+                        <line x1="30" y1="65" x2="30" y2="85" stroke-width="0.8" opacity="0.5" />
+                        <circle cx="50" cy="45" r="4" stroke-width="1.2" fill="currentColor" opacity="0.8" />
+                        <circle cx="30" cy="65" r="3" stroke-width="1" />
+                        <circle cx="70" cy="65" r="3" stroke-width="1" />
+                        <circle cx="30" cy="85" r="2" stroke-width="0.8" fill="currentColor" opacity="0.6" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <canvas id="ambient-particles"></canvas>
+
+        <!-- Cinematic Noise Texture Overlay -->
+        <div class="noise-overlay"></div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="nav-container">
+            <!-- Premium Branded Logo -->
+            <a href="#hero" class="nav-logo" id="nav-logo">
+                <span class="logo-text">Aaryan</span><span class="logo-accent">.</span>
+            </a>
+
+            <!-- Centered Navigation Links with Numbered Prefixes -->
+            <nav class="nav-pills" aria-label="Main Navigation">
+                <div class="nav-indicator"></div>
+                <a href="#hero" class="nav-pill active" id="pill-home">Home</a>
+                <a href="#about" class="nav-pill" id="pill-work">About</a>
+                <a href="#projects" class="nav-pill" id="pill-projects">Projects</a>
+                <a href="#beyond-code" class="nav-pill" id="pill-beyond">Beyond</a>
+                <a href="#contact" class="nav-pill" id="pill-contact">Contact</a>
+            </nav>
+
+
+            <!-- Mobile Toggle Menu Button -->
+            <button class="mobile-toggle" aria-label="Toggle Menu" aria-expanded="false" id="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <nav class="mobile-nav">
+            <a href="#hero" class="mobile-link active" data-index="0">Home</a>
+            <a href="#about" class="mobile-link" data-index="1">About</a>
+            <a href="#projects" class="mobile-link" data-index="2">Projects</a>
+            <a href="#beyond-code" class="mobile-link" data-index="3">Beyond</a>
+            <a href="#contact" class="mobile-link" data-index="4">Contact</a>
+            <a href="resume.pdf" class="mobile-resume-btn" download>
+                <i class="fa-solid fa-arrow-down-long"></i> Download Resume
+            </a>
+        </nav>
+    </div>
+
+    <main>
+        <!-- Hero Section (Strict layout clone of the screenshot) -->
+        <section class="hero" id="hero">
+            <div class="hero-container">
+                <!-- Left typography & content -->
+                <div class="hero-left-content">
+                    <div class="hero-top-text">
+                        <h1 class="hero-greeting">
+                            <span class="greeting-hi">Hi</span> <span class="greeting-im">I'm</span>
+                        </h1>
+                        <h2 class="hero-name">
+                            <span class="name-first">Aaryan</span> <span class="name-last">Ningdhalli</span>
+                        </h2>
+                    </div>
+                    <p class="hero-description-text">
+                        I blend structured engineering with visual storytelling to build immersive, responsive web
+                        experiences. Specializing in AI/ML integration and minimalist UI/UX design.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="resume.pdf" class="hero-resume-btn" download>
+                            <i class="fa-solid fa-arrow-down-long"></i>
+                            <span>Download Resume</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Portrait wrapper (centered background layer) -->
+                <div class="hero-bg-heading-wrapper">
+                    <div class="hero-bg-heading">PORTFOLIO</div>
+                </div>
+                <div class="hero-portrait-layer">
+                    <div class="portrait-wrapper">
+                        <div class="portrait-glow"></div>
+                        <img src="profile.png" alt="Aaryan Sama Portrait" class="portrait-image">
+                    </div>
+                </div>
+
+                <!-- Right typography (UI/UX WEB DESIGNER) at bottom right -->
+                <div class="hero-right-content">
+                    <span class="role-tag">UI/UX DESIGNER</span>
+                    <div class="role-main">
+                        <span class="role-word">WEB</span>
+                        <span class="role-word">DEVELOPER</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-down-hint">
+                <a href="#about" class="scroll-btn" aria-label="Scroll Down">
+                    <span class="scroll-mouse"><span class="scroll-wheel"></span></span>
+                    <span class="scroll-text">Explore Portfolio</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- About Section — Redesigned -->
+        <section class="about" id="about">
+
+            <!-- Background Typography (Drifting Parallax Title) -->
+            <div class="about-bg-title-wrapper">
+                <div class="about-bg-title">ABOUT ME</div>
+            </div>
+
+            <!-- Portrait panel: full-height background -->
+            <div class="about-left">
+                <div class="about-portrait-wrap">
+                    <div class="about-arc"></div>
+                    <div class="about-orb"></div>
+                    <img src="about-profile.png" alt="Aaryan Sama Portrait" class="about-portrait">
+                </div>
+            </div>
+
+            <!-- Centred content container — same max-width as hero -->
+            <div class="about-container">
+
+                <!-- Empty left column (sits over portrait area) -->
+                <div class="about-spacer"></div>
+
+                <!-- Right column: all content -->
+                <div class="about-right">
+
+                    <!-- Heading + tagline row -->
+                    <div class="about-heading-row">
+                        <div class="about-title-block">
+                            <div class="about-title-line1">ABOUT</div>
+                            <div class="about-title-line2">ME.</div>
+                        </div>
+                        <div class="about-tagline-block">
+                            <div class="about-rotating-text">
+                                <span class="rotating-word active">Engineer.</span>
+                                <span class="rotating-word">Designer.</span>
+                                <span class="rotating-word">Problem Solver.</span>
+                                <span class="rotating-word">Thinker.</span>
+                                <span class="rotating-word">Creator.</span>
+                            </div>
+                            <span class="about-tagline-bar"></span>
+                        </div>
+                    </div>
+
+                    <!-- Paragraph -->
+                    <p class="about-para">
+                        I'm a Computer Science graduate who loves building intelligent systems and beautiful
+                        experiences. I specialize in AI/ML and minimalist UI/UX, turning complex technical challenges into simple,
+                        human&#8209;centered solutions—and can communicate fluently in 5 languages.
+                    </p>
+
+                    <!-- Skill cards row -->
+                    <div class="about-skill-cards">
+                        <div class="about-skill-card">
+                            <i class="fa-solid fa-brain about-skill-icon"></i>
+                            <h4>AI / ML</h4>
+                            <p>Building models that learn, adapt and solve real world problems.</p>
+                        </div>
+                        <div class="about-skill-card">
+                            <i class="fa-solid fa-pen-nib about-skill-icon"></i>
+                            <h4>UI / UX</h4>
+                            <p>Designing clean, minimal and intuitive digital experiences.</p>
+                        </div>
+                        <div class="about-skill-card">
+                            <i class="fa-solid fa-chess-knight about-skill-icon"></i>
+                            <h4>CHESS</h4>
+                            <p>Strategic thinking that shapes the way I solve problems.</p>
+                        </div>
+                        <div class="about-skill-card">
+                            <i class="fa-solid fa-code about-skill-icon"></i>
+                            <h4>ENGINEERING</h4>
+                            <p>Writing clean code and building scalable backend systems.</p>
+                        </div>
+                    </div>
+
+                    <!-- Quote block -->
+                    <div class="about-quote">
+                        <span class="about-quote-mark">&ldquo;</span>
+                        <p>Whether I'm training a model, designing an interface, or planning a chess move—I love the
+                            process of thinking deeply and creating meaning.</p>
+                        <div class="about-quote-dots">
+                            <span></span><span></span><span></span>
+                            <span></span><span></span><span></span>
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+
+                    <!-- Stats row -->
+                    <div class="about-stats">
+                        <div class="about-stat">
+                            <span class="about-stat-num">5+</span>
+                            <span class="about-stat-label">PROJECTS</span>
+                        </div>
+                        <div class="about-stat-divider"></div>
+                        <div class="about-stat">
+                            <span class="about-stat-num">2+</span>
+                            <span class="about-stat-label">YEARS CODING</span>
+                        </div>
+                        <div class="about-stat-divider"></div>
+                        <div class="about-stat">
+                            <span class="about-stat-num">5+</span>
+                            <span class="about-stat-label">TECHNOLOGIES</span>
+                        </div>
+                        <div class="about-stat-divider"></div>
+                        <div class="about-stat">
+                            <span class="about-stat-num">∞</span>
+                            <span class="about-stat-label">CURIOSITY</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills" id="skills">
+            <div class="parallax-text" data-speed="0.12">SKILLS</div>
+            <div class="liquid-glass-blob blob-skills"></div>
+            <div class="liquid-glass-blob blob-skills-2"></div>
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="tagline">// EXPERTISE</span>
+                    <h2 class="section-title">Skills & Technologies</h2>
+                </div>
+
+                <div class="skills-grid">
+                    <!-- Category 1 -->
+                    <div class="skills-card">
+                        <div class="skills-header">
+                            <i class="fa-solid fa-code"></i>
+                            <h3>Programming</h3>
+                        </div>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">C Language</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 2 -->
+                    <div class="skills-card">
+                        <div class="skills-header">
+                            <i class="fa-solid fa-globe"></i>
+                            <h3>Web Dev</h3>
+                        </div>
+                        <div class="skills-tags">
+                            <span class="skill-tag">HTML5 / CSS3</span>
+                            <span class="skill-tag">React.js</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">Django</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 3 -->
+                    <div class="skills-card">
+                        <div class="skills-header">
+                            <i class="fa-solid fa-database"></i>
+                            <h3>Databases & Cloud</h3>
+                        </div>
+                        <div class="skills-tags">
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Google Cloud</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 4 -->
+                    <div class="skills-card">
+                        <div class="skills-header">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <h3>Design & Prototyping</h3>
+                        </div>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Figma</span>
+                            <span class="skill-tag">Webflow</span>
+                            <span class="skill-tag">Canva</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 5 -->
+                    <div class="skills-card">
+                        <div class="skills-header">
+                            <i class="fa-solid fa-toolbox"></i>
+                            <h3>Tools & Platforms</h3>
+                        </div>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Git & GitHub</span>
+                            <span class="skill-tag">LLMs & Prompting</span>
+                            <span class="skill-tag">Bolt.new</span>
+                            <span class="skill-tag">MAS</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 6 -->
+                    <div class="skills-card">
+                        <div class="skills-header">
+                            <i class="fa-solid fa-display"></i>
+                            <h3>Environments</h3>
+                        </div>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Windows Server</span>
+                            <span class="skill-tag">macOS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="projects" id="projects">
+            <div class="parallax-text" data-speed="-0.18">WORK</div>
+            <div class="liquid-glass-blob blob-projects"></div>
+            <div class="liquid-glass-blob blob-projects-2"></div>
+            <div class="liquid-glass-blob blob-projects-3"></div>
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="tagline">// CREATIVE WORKS</span>
+                    <h2 class="section-title">Featured Projects</h2>
+                </div>
+
+                <div class="projects-accordion">
+                    <!-- Project 1: Featured -->
+                    <div class="accordion-item active" data-index="0">
+                        <div class="accordion-content">
+                            <div class="project-bg-image" style="background-image: url('chess_ai_bg.png')"></div>
+                            <div class="accordion-details">
+                                <h3>Chess AI Model</h3>
+                                <p>An intelligent, highly competitive chess engine built utilizing Reinforcement
+                                    Learning. The model learns tactical positional structures, dynamically adapts its
+                                    playstyle, and optimizes moves based on real-time board states.</p>
+                                <div class="project-tech">
+                                    <span>Python</span>
+                                    <span>Reinforcement Learning</span>
+                                    <span>AI</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/xlrrr8" target="_blank" class="proj-link"><i
+                                            class="fa-brands fa-github"></i> Codebase</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="accordion-item" data-index="1">
+                        <div class="accordion-content">
+                            <div class="project-bg-image" style="background-image: url('vocal_chess_bg.png')"></div>
+                            <div class="accordion-details">
+                                <h3>Vocal Chess</h3>
+                                <p>A hands-free, interactive vocal interface designed for playing chess. Integrates
+                                    natural language processing and speech recognition to interpret voice commands into
+                                    legal chess notation.</p>
+                                <div class="project-tech">
+                                    <span>Python</span>
+                                    <span>Speech Recognition</span>
+                                    <span>NLP</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/xlrrr8" target="_blank" class="proj-link"><i
+                                            class="fa-brands fa-github"></i> Codebase</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="accordion-item" data-index="2">
+                        <div class="accordion-content">
+                            <div class="project-bg-image" style="background-image: url('deepfake_detect_bg.png')"></div>
+                            <div class="accordion-details">
+                                <h3>Deep Fake Detection</h3>
+                                <p>An AI model trained in digital security to classify fake media. Utilizes pattern
+                                    recognition, CNN frameworks, and facial feature evaluation to flag synthesized image
+                                    elements.</p>
+                                <div class="project-tech">
+                                    <span>Machine Learning</span>
+                                    <span>Computer Vision</span>
+                                    <span>Python</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/xlrrr8" target="_blank" class="proj-link"><i
+                                            class="fa-brands fa-github"></i> Codebase</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="accordion-item" data-index="3">
+                        <div class="accordion-content">
+                            <div class="project-bg-image" style="background-image: url('voice_library_bg.png')"></div>
+                            <div class="accordion-details">
+                                <h3>Voice-Controlled Library</h3>
+                                <p>An efficient digital catalog system allowing users to check in/out books, query
+                                    catalog search parameters, and request availability utilizing speech recognition
+                                    commands.</p>
+                                <div class="project-tech">
+                                    <span>Voice Control</span>
+                                    <span>NLP</span>
+                                    <span>Python</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/xlrrr8" target="_blank" class="proj-link"><i
+                                            class="fa-brands fa-github"></i> Codebase</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="accordion-item" data-index="4">
+                        <div class="accordion-content">
+                            <div class="project-bg-image" style="background-image: url('birthday_beacon_bg.png')"></div>
+                            <div class="accordion-details">
+                                <h3>Birthday Beacon</h3>
+                                <p>An automated reminder and notification scheduler that coordinates birthday greetings and group wishes. Features customizable templates and multi-channel API delivery.</p>
+                                <div class="project-tech">
+                                    <span>Node.js</span>
+                                    <span>Express</span>
+                                    <span>MongoDB</span>
+                                    <span>Twilio API</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/xlrrr8" target="_blank" class="proj-link"><i
+                                            class="fa-brands fa-github"></i> Codebase</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 6 -->
+                    <div class="accordion-item" data-index="5">
+                        <div class="accordion-content">
+                            <div class="project-bg-image" style="background-image: url('rate_your_day_bg.png')"></div>
+                            <div class="accordion-details">
+                                <h3>RYD - Rate Your Day</h3>
+                                <p>A minimalist mood tracking and micro-journaling application. Allows users to score their days, log quick text notes, and visualize emotional trends over time with dynamic data analytics.</p>
+                                <div class="project-tech">
+                                    <span>React.js</span>
+                                    <span>Node.js</span>
+                                    <span>PostgreSQL</span>
+                                    <span>Chart.js</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/xlrrr8" target="_blank" class="proj-link"><i
+                                            class="fa-brands fa-github"></i> Codebase</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements subsection -->
+                <div class="achievements-section">
+                    <h3 class="subsection-title">Key Milestones & Achievements</h3>
+                    <div class="achievements-grid">
+                        <div class="achievement-card">
+                            <i class="fa-solid fa-trophy"></i>
+                            <h4>Smart India Hackathon</h4>
+                            <p>Participated at the national level, successfully building and pitching a Fake Data
+                                Perception modeling project.</p>
+                        </div>
+                        <div class="achievement-card">
+                            <i class="fa-solid fa-people-group"></i>
+                            <h4>Team Leadership</h4>
+                            <p>Led two developer teams, spearheading agile project design, task division, and final
+                                technical deployment.</p>
+                        </div>
+                        <div class="achievement-card">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <h4>Event Management</h4>
+                            <p>Organized a major institutional event, managing cross-functional teams, schedules, and
+                                operations.</p>
+                        </div>
+                        <div class="achievement-card">
+                            <i class="fa-solid fa-microphone"></i>
+                            <h4>Stand-up Comedy</h4>
+                            <p>Secured 2nd place in the college annual cultural event, demonstrating versatile public
+                                speaking skills.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Beyond the Code Section -->
+        <section class="beyond-code" id="beyond-code">
+            <div class="parallax-text" data-speed="0.14">PASSIONS</div>
+            <div class="liquid-glass-blob blob-beyond"></div>
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="tagline">// MY PASSIONS</span>
+                    <h2 class="section-title">Beyond The Code</h2>
+                </div>
+
+                <div class="interests-accordion">
+                    <div class="interest-accordion-item active" data-index="0">
+                        <div class="interest-accordion-content">
+                            <div class="project-bg-image"
+                                style="background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=600&auto=format&fit=crop')">
+                            </div>
+                            <div class="interest-details">
+                                <h3>Films</h3>
+                                <p>Deep-diving into cinematic storytelling, visual direction, and screenplays. I
+                                    appreciate complex narratives, editing techniques, and the art of modern film
+                                    composition.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interest-accordion-item" data-index="1">
+                        <div class="interest-accordion-content">
+                            <div class="project-bg-image"
+                                style="background-image: url('https://images.unsplash.com/photo-1529699211952-734e80c4d42b?q=80&w=600&auto=format&fit=crop')">
+                            </div>
+                            <div class="interest-details">
+                                <h3>Chess</h3>
+                                <p>Analyzing complex patterns, positions, and defensive configurations. I enjoy studying
+                                    sequences and have coded chess models powered by Reinforcement Learning.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interest-accordion-item" data-index="2">
+                        <div class="interest-accordion-content">
+                            <div class="project-bg-image"
+                                style="background-image: url('https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=600&auto=format&fit=crop')">
+                            </div>
+                            <div class="interest-details">
+                                <h3>Poster Design</h3>
+                                <p>Blending vector shapes, minimal grid theories, and striking modern typography to
+                                    design impactful poster visual concepts that capture direct viewer attention.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interest-accordion-item" data-index="3">
+                        <div class="interest-accordion-content">
+                            <div class="project-bg-image"
+                                style="background-image: url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=600&auto=format&fit=crop')">
+                            </div>
+                            <div class="interest-details">
+                                <h3>Literature</h3>
+                                <p>Exploring philosophical themes, structural narrative styles, and storytelling
+                                    mechanics. Deep reading drives my focus and creative structural reasoning.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interest-accordion-item" data-index="4">
+                        <div class="interest-accordion-content">
+                            <div class="project-bg-image"
+                                style="background-image: url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=600&auto=format&fit=crop')">
+                            </div>
+                            <div class="interest-details">
+                                <h3>Writing & Art</h3>
+                                <p>Translating abstract thoughts, stand-up setups, and visual compositions into physical
+                                    and digital creative drafts, constantly experimenting with forms.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interest-accordion-item" data-index="5">
+                        <div class="interest-accordion-content">
+                            <div class="project-bg-image"
+                                style="background-image: url('https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?q=80&w=600&auto=format&fit=crop')">
+                            </div>
+                            <div class="interest-details">
+                                <h3>Books</h3>
+                                <p>Reading across history, sci-fi, and technical deep-dives. Books expand my mental
+                                    framework, inspire lateral thinking, and provide structured views on diverse
+                                    subjects.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <div class="parallax-text" data-speed="-0.12">CONNECT</div>
+            <div class="liquid-glass-blob blob-contact"></div>
+            <div class="liquid-glass-blob blob-contact-2"></div>
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="tagline">// LET'S COLLABORATE</span>
+                    <h2 class="section-title">Get In Touch</h2>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Let's start a conversation</h3>
+                        <p class="contact-intro">I'm currently open to internship, full-time positions, and
+                            collaborative freelance projects. Whether you want to discuss a new project idea, chess
+                            strategies, or just say hello, drop me a message!</p>
+
+                        <div class="contact-methods">
+                            <div class="method-card">
+                                <i class="fa-solid fa-envelope"></i>
+                                <div class="method-details">
+                                    <span>EMAIL ME</span>
+                                    <a href="mailto:itzaaryan360@gmail.com">itzaaryan360@gmail.com</a>
+                                </div>
+                            </div>
+                            <div class="method-card">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <div class="method-details">
+                                    <span>LOCATION</span>
+                                    <span>Hyderabad, Telangana, India</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="social-links">
+                            <a href="https://github.com/xlrrr8" target="_blank" aria-label="GitHub"><i
+                                    class="fa-brands fa-github"></i></a>
+                            <a href="https://www.instagram.com/iem.aaryan" target="_blank" aria-label="Instagram"><i
+                                    class="fa-brands fa-instagram"></i></a>
+                            <a href="https://in.pinterest.com/itztogi/_pins/" target="_blank" aria-label="Pinterest"><i
+                                    class="fa-brands fa-pinterest"></i></a>
+                            <a href="https://www.chess.com/member/aarya-49" target="_blank" aria-label="Chess.com"><i
+                                    class="fa-solid fa-chess"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-container">
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" id="name" required placeholder=" " autocomplete="name">
+                                    <label for="name">Your Name</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" id="email" required placeholder=" " autocomplete="email">
+                                    <label for="email">Your Email</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" rows="5" required placeholder=" "></textarea>
+                                <label for="message">Your Message</label>
+                            </div>
+                            <button type="submit" class="submit-btn" id="submitBtn">
+                                <span>Send Message</span>
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </form>
+                        <div class="form-feedback hidden" id="formFeedback"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <span class="footer-logo">Aaryan Sama</span>
+                <p>Designing digital paths through code and visual storytelling.</p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Aaryan Sama. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Premium Animation & Smooth Scroll Engines -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
