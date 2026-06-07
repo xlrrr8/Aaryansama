@@ -1,4 +1,5 @@
 let lenis;
+let isMobileClickScrolling = false;
 
 /* ==========================================================================
    LENIS SMOOTH SCROLL INTEGRATION
@@ -338,17 +339,19 @@ function initAmbientParticles() {
             let ax = Math.cos(angle) * this.speedMultiplier;
             let ay = Math.sin(angle) * this.speedMultiplier;
 
-            // Mouse repulsion — push particles away from cursor
-            const dx = this.x - mouse.x;
-            const dy = this.y - mouse.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
+            // Mouse repulsion — push particles away from cursor (only calculate if mouse is on screen)
+            if (mouse.x > -9000) {
+                const dx = this.x - mouse.x;
+                const dy = this.y - mouse.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
 
-            if (dist < mouseRadius && dist > 0) {
-                // Smooth inverse-square repulsion force
-                const force = (mouseRadius - dist) / mouseRadius;
-                const repelStrength = force * force * 2.5; // Quadratic falloff
-                ax += (dx / dist) * repelStrength;
-                ay += (dy / dist) * repelStrength;
+                if (dist < mouseRadius && dist > 0) {
+                    // Smooth inverse-square repulsion force
+                    const force = (mouseRadius - dist) / mouseRadius;
+                    const repelStrength = force * force * 2.5; // Quadratic falloff
+                    ax += (dx / dist) * repelStrength;
+                    ay += (dy / dist) * repelStrength;
+                }
             }
 
             // Apply friction and accumulate acceleration
@@ -362,12 +365,15 @@ function initAmbientParticles() {
         draw() {
             const currentOpacity = this.opacity * (this.life / this.maxLife);
 
-            // Particles near the cursor glow slightly brighter
-            const dx = this.x - mouse.x;
-            const dy = this.y - mouse.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            const proximityBoost = dist < mouseRadius * 1.5 ? 
-                (1 + (1 - dist / (mouseRadius * 1.5)) * 1.5) : 1;
+            // Particles near the cursor glow slightly brighter (only calculate if mouse is on screen)
+            let proximityBoost = 1;
+            if (mouse.x > -9000) {
+                const dx = this.x - mouse.x;
+                const dy = this.y - mouse.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                proximityBoost = dist < mouseRadius * 1.5 ? 
+                    (1 + (1 - dist / (mouseRadius * 1.5)) * 1.5) : 1;
+            }
 
             ctx.fillStyle = `rgba(255, 255, 255, ${currentOpacity * proximityBoost})`;
             ctx.beginPath();
@@ -377,11 +383,12 @@ function initAmbientParticles() {
         }
     }
     
-    // Populate flow field particles
+    // Populate flow field particles (optimized count for mobile screens)
     const initParticles = () => {
         particlesArray = [];
         const count = Math.floor((canvas.width * canvas.height) / 10000);
-        for (let i = 0; i < Math.min(count, 220); i++) {
+        const maxParticles = window.innerWidth <= 820 ? 15 : 220;
+        for (let i = 0; i < Math.min(count, maxParticles); i++) {
             particlesArray.push(new FlowParticle());
         }
     };
@@ -669,8 +676,33 @@ function initScrollParallax() {
     const blobGlobal3 = document.querySelector('.blob-global-3-wrap');
     const blobGlobal4 = document.querySelector('.blob-global-4-wrap');
 
-    // Select outline backdrop parallax texts
-    const parallaxTexts = document.querySelectorAll('.parallax-text');
+    // Select outline backdrop parallax texts with precalculated geometry to eliminate layout thrashing
+    const getAbsoluteOffsetTop = (element) => {
+        let offsetTop = 0;
+        while(element) {
+            offsetTop += element.offsetTop;
+            element = element.offsetParent;
+        }
+        return offsetTop;
+    };
+
+    const parallaxData = [];
+    const initParallaxData = () => {
+        parallaxData.length = 0;
+        document.querySelectorAll('.parallax-text').forEach(el => {
+            const parent = el.parentElement;
+            if (parent) {
+                parallaxData.push({
+                    element: el,
+                    speed: parseFloat(el.getAttribute('data-speed')) || 0.1,
+                    parentOffsetTop: getAbsoluteOffsetTop(parent),
+                    parentHeight: parent.offsetHeight
+                });
+            }
+        });
+    };
+    initParallaxData();
+    window.addEventListener('resize', initParallaxData);
 
     let lastScrollY = window.scrollY;
     let targetScrollY = window.scrollY;
@@ -727,16 +759,12 @@ function initScrollParallax() {
             blobGlobal4.style.transform = `translate3d(0, ${lastScrollY * -0.05}px, 0)`;
         }
 
-        // Backstage Parallax outline texts relative to parent viewport offset
-        parallaxTexts.forEach(el => {
-            const speed = parseFloat(el.getAttribute('data-speed')) || 0.1;
-            const parent = el.parentElement;
-            if (parent) {
-                const parentRect = parent.getBoundingClientRect();
-                const relativeOffset = (window.innerHeight / 2) - (parentRect.top + parentRect.height / 2);
-                const translateY = relativeOffset * speed;
-                el.style.transform = `translate3d(-50%, ${translateY}px, 0)`;
-            }
+        // Backstage Parallax outline texts relative to parent viewport offset (Zero layout thrashing!)
+        parallaxData.forEach(item => {
+            const parentTop = item.parentOffsetTop - lastScrollY;
+            const relativeOffset = (window.innerHeight / 2) - (parentTop + item.parentHeight / 2);
+            const translateY = relativeOffset * item.speed;
+            item.element.style.transform = `translate3d(-50%, ${translateY}px, 0)`;
         });
 
         requestAnimationFrame(updateScrollParallax);
@@ -768,10 +796,38 @@ function initProjectsAccordion() {
             }
         });
 
-        // Click support as a robust fallback
+        // Click/tap handler: maximize card and center scroll on mobile
         item.addEventListener('click', () => {
-            if (window.innerWidth <= 820) return;
+            if (window.innerWidth <= 820) {
+                const currentActive = document.querySelector('.accordion-item.active');
+                if (currentActive !== item) {
+                    isMobileClickScrolling = true;
+                    if (currentActive) currentActive.classList.remove('active');
+                    item.classList.add('active');
+                    
+                    // Smoothly scroll the item to the center of the viewport on mobile
+                    if (typeof lenis !== 'undefined' && lenis) {
+                        lenis.scrollTo(item, {
+                            offset: -(window.innerHeight / 2 - 45),
+                            duration: 0.8,
+                            onComplete: () => {
+                                setTimeout(() => {
+                                    isMobileClickScrolling = false;
+                                }, 50);
+                            }
+                        });
+                    } else {
+                        const targetY = item.getBoundingClientRect().top + window.scrollY - (window.innerHeight / 2) + 45;
+                        window.scrollTo({ top: targetY, behavior: 'smooth' });
+                        setTimeout(() => {
+                            isMobileClickScrolling = false;
+                        }, 800);
+                    }
+                }
+                return;
+            }
 
+            // Desktop click fallback
             const currentActive = document.querySelector('.accordion-item.active');
             if (currentActive !== item) {
                 if (currentActive) currentActive.classList.remove('active');
@@ -863,10 +919,38 @@ function initInterestsAccordion() {
             }
         });
 
-        // Click support as a robust fallback
+        // Click/tap handler: maximize card and center scroll on mobile
         item.addEventListener('click', () => {
-            if (window.innerWidth <= 820) return;
+            if (window.innerWidth <= 820) {
+                const currentActive = document.querySelector('.interest-accordion-item.active');
+                if (currentActive !== item) {
+                    isMobileClickScrolling = true;
+                    if (currentActive) currentActive.classList.remove('active');
+                    item.classList.add('active');
+                    
+                    // Smoothly scroll the item to the center of the viewport on mobile
+                    if (typeof lenis !== 'undefined' && lenis) {
+                        lenis.scrollTo(item, {
+                            offset: -(window.innerHeight / 2 - 45),
+                            duration: 0.8,
+                            onComplete: () => {
+                                setTimeout(() => {
+                                    isMobileClickScrolling = false;
+                                }, 50);
+                            }
+                        });
+                    } else {
+                        const targetY = item.getBoundingClientRect().top + window.scrollY - (window.innerHeight / 2) + 45;
+                        window.scrollTo({ top: targetY, behavior: 'smooth' });
+                        setTimeout(() => {
+                            isMobileClickScrolling = false;
+                        }, 800);
+                    }
+                }
+                return;
+            }
 
+            // Desktop click fallback
             const currentActive = document.querySelector('.interest-accordion-item.active');
             if (currentActive !== item) {
                 if (currentActive) currentActive.classList.remove('active');
@@ -995,9 +1079,11 @@ function initRotatingText() {
 function initMobileScrollAccordion() {
     const projectItems = document.querySelectorAll('.accordion-item');
     const interestItems = document.querySelectorAll('.interest-accordion-item');
+    let ticking = false;
 
     const handleScroll = () => {
         if (window.innerWidth > 820) return;
+        if (isMobileClickScrolling) return; // Skip updating active class if we're programmatically scrolling to a clicked card
 
         const viewportCenter = window.innerHeight / 2;
 
@@ -1054,11 +1140,20 @@ function initMobileScrollAccordion() {
         }
     };
 
+    const throttledHandleScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            handleScroll();
+            ticking = false;
+        });
+    };
+
     // Integrate with Lenis scroll event if available, otherwise fallback to standard scroll
     if (typeof lenis !== 'undefined' && lenis) {
-        lenis.on('scroll', handleScroll);
+        lenis.on('scroll', throttledHandleScroll);
     } else {
-        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('scroll', throttledHandleScroll, { passive: true });
     }
 
     // Trigger once initially to set correct state

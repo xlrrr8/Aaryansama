@@ -1892,6 +1892,9 @@ section {
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
+    .bg-video-wrapper {
+        display: none !important;
+    }
     .about {
         height: auto;
         min-height: auto;
@@ -1905,17 +1908,17 @@ section {
         position: relative;
         width: 100%;
         height: auto;
-        min-height: 380px;
+        min-height: 440px;
         display: flex;
         justify-content: center;
         align-items: flex-end;
-        margin-bottom: 40px;
+        margin-bottom: 50px;
     }
     .about-portrait-wrap {
         position: relative;
         width: 100%;
-        max-width: 320px;
-        height: 320px;
+        max-width: 380px;
+        height: 380px;
         display: flex;
         justify-content: center;
         align-items: flex-end;
@@ -1926,21 +1929,23 @@ section {
         transform: none !important;
         height: 100%;
         width: auto;
-        bottom: 0;
+        bottom: -40px;
         object-fit: contain;
     }
     .about-arc {
+        top: 55% !important;
         left: 50%;
         transform: translate(-50%, -50%) !important;
         width: 100%;
-        max-width: 300px;
+        max-width: 350px;
         aspect-ratio: 1;
     }
     .about-orb {
+        top: 55% !important;
         left: 50%;
         transform: translate(-50%, -50%) !important;
         width: 90%;
-        max-width: 280px;
+        max-width: 330px;
         height: 90%;
     }
     .about-container {
@@ -3495,6 +3500,7 @@ section {
         transform: none !important;
         animation: none !important;
         opacity: 1 !important;
+        bottom: -30px !important;
     }
 
     .portrait-glow {
@@ -3507,7 +3513,7 @@ section {
         box-shadow: 0 0 30px rgba(0, 86, 255, 0.4), inset 0 0 30px rgba(0, 86, 255, 0.2) !important;
         z-index: 1 !important;
         left: 50% !important;
-        top: 45% !important;
+        top: 51% !important;
         transform: translate(-50%, -50%) !important;
         animation: floatGlow 8s ease-in-out infinite alternate !important;
     }
@@ -3515,7 +3521,7 @@ section {
     .portrait-arc {
         display: block !important;
         position: absolute;
-        top: 45%;
+        top: 51% !important;
         left: 50%;
         transform: translate(-50%, -50%);
         width: 300px;
