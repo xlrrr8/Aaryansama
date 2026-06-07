@@ -780,11 +780,56 @@ function initScrollParallax() {
 /* ==========================================================================
    PREMIUM DYNAMIC HORIZONTAL PROJECTS ACCORDION SWIPER
    ========================================================================== */
+function setupMobileTap(item, type) {
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    item.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    item.addEventListener('touchend', (e) => {
+        if (window.innerWidth > 820) return;
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        const diffX = Math.abs(touchEndX - touchStartX);
+        const diffY = Math.abs(touchEndY - touchStartY);
+
+        // If finger moved less than 8px in both directions, it's a tap!
+        if (diffX < 8 && diffY < 8) {
+            handleMobileTap(item, type);
+        }
+    }, { passive: true });
+}
+
+function handleMobileTap(item, type) {
+    const activeClass = type === 'project' ? 'accordion-item' : 'interest-accordion-item';
+    const currentActive = document.querySelector(`.${activeClass}.active`);
+    
+    if (currentActive !== item) {
+        isMobileClickScrolling = true;
+        if (currentActive) currentActive.classList.remove('active');
+        item.classList.add('active');
+        
+        // Scroll card to center of viewport using native smooth scroll on mobile for better compatibility
+        const targetY = item.getBoundingClientRect().top + window.scrollY - (window.innerHeight / 2) + 45;
+        window.scrollTo({ top: targetY, behavior: 'smooth' });
+        
+        setTimeout(() => {
+            isMobileClickScrolling = false;
+        }, 800);
+    }
+}
+
 function initProjectsAccordion() {
     const accordionItems = document.querySelectorAll('.accordion-item');
     if (accordionItems.length === 0) return;
 
     accordionItems.forEach((item) => {
+        // Bind touch tap events for mobile layout
+        setupMobileTap(item, 'project');
+
         // Maximize on hover (mouseenter)
         item.addEventListener('mouseenter', () => {
             if (window.innerWidth <= 820) return;
@@ -796,34 +841,10 @@ function initProjectsAccordion() {
             }
         });
 
-        // Click/tap handler: maximize card and center scroll on mobile
+        // Click/tap handler: fallback click listener
         item.addEventListener('click', () => {
             if (window.innerWidth <= 820) {
-                const currentActive = document.querySelector('.accordion-item.active');
-                if (currentActive !== item) {
-                    isMobileClickScrolling = true;
-                    if (currentActive) currentActive.classList.remove('active');
-                    item.classList.add('active');
-                    
-                    // Smoothly scroll the item to the center of the viewport on mobile
-                    if (typeof lenis !== 'undefined' && lenis) {
-                        lenis.scrollTo(item, {
-                            offset: -(window.innerHeight / 2 - 45),
-                            duration: 0.8,
-                            onComplete: () => {
-                                setTimeout(() => {
-                                    isMobileClickScrolling = false;
-                                }, 50);
-                            }
-                        });
-                    } else {
-                        const targetY = item.getBoundingClientRect().top + window.scrollY - (window.innerHeight / 2) + 45;
-                        window.scrollTo({ top: targetY, behavior: 'smooth' });
-                        setTimeout(() => {
-                            isMobileClickScrolling = false;
-                        }, 800);
-                    }
-                }
+                handleMobileTap(item, 'project');
                 return;
             }
 
@@ -908,6 +929,9 @@ function initInterestsAccordion() {
     if (accordionItems.length === 0) return;
 
     accordionItems.forEach((item) => {
+        // Bind touch tap events for mobile layout
+        setupMobileTap(item, 'interest');
+
         // Maximize on hover (mouseenter)
         item.addEventListener('mouseenter', () => {
             if (window.innerWidth <= 820) return;
@@ -919,34 +943,10 @@ function initInterestsAccordion() {
             }
         });
 
-        // Click/tap handler: maximize card and center scroll on mobile
+        // Click/tap handler: fallback click listener
         item.addEventListener('click', () => {
             if (window.innerWidth <= 820) {
-                const currentActive = document.querySelector('.interest-accordion-item.active');
-                if (currentActive !== item) {
-                    isMobileClickScrolling = true;
-                    if (currentActive) currentActive.classList.remove('active');
-                    item.classList.add('active');
-                    
-                    // Smoothly scroll the item to the center of the viewport on mobile
-                    if (typeof lenis !== 'undefined' && lenis) {
-                        lenis.scrollTo(item, {
-                            offset: -(window.innerHeight / 2 - 45),
-                            duration: 0.8,
-                            onComplete: () => {
-                                setTimeout(() => {
-                                    isMobileClickScrolling = false;
-                                }, 50);
-                            }
-                        });
-                    } else {
-                        const targetY = item.getBoundingClientRect().top + window.scrollY - (window.innerHeight / 2) + 45;
-                        window.scrollTo({ top: targetY, behavior: 'smooth' });
-                        setTimeout(() => {
-                            isMobileClickScrolling = false;
-                        }, 800);
-                    }
-                }
+                handleMobileTap(item, 'interest');
                 return;
             }
 
