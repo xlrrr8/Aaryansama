@@ -1,6 +1,15 @@
 let lenis;
 let isMobileClickScrolling = false;
 
+const getAbsoluteOffsetTop = (element) => {
+    let offsetTop = 0;
+    while(element) {
+        offsetTop += element.offsetTop;
+        element = element.offsetParent;
+    }
+    return offsetTop;
+};
+
 /* ==========================================================================
    LENIS SMOOTH SCROLL INTEGRATION
    ========================================================================== */
@@ -677,15 +686,6 @@ function initScrollParallax() {
     const blobGlobal4 = document.querySelector('.blob-global-4-wrap');
 
     // Select outline backdrop parallax texts with precalculated geometry to eliminate layout thrashing
-    const getAbsoluteOffsetTop = (element) => {
-        let offsetTop = 0;
-        while(element) {
-            offsetTop += element.offsetTop;
-            element = element.offsetParent;
-        }
-        return offsetTop;
-    };
-
     const parallaxData = [];
     const initParallaxData = () => {
         parallaxData.length = 0;
@@ -812,8 +812,17 @@ function handleMobileTap(item, type) {
         if (currentActive) currentActive.classList.remove('active');
         item.classList.add('active');
         
+        // Calculate the absolute static target scroll position to prevent layout shift errors
+        const isProject = type === 'project';
+        const container = isProject ? document.querySelector('.projects-accordion') : document.querySelector('.interests-accordion');
+        const items = Array.from(isProject ? document.querySelectorAll('.accordion-item') : document.querySelectorAll('.interest-accordion-item'));
+        const index = items.indexOf(item);
+        const itemHeight = isProject ? 110 : 105;
+        
+        const containerTop = getAbsoluteOffsetTop(container);
+        const targetY = containerTop + index * itemHeight - (window.innerHeight / 2) + 45;
+        
         // Scroll card to center of viewport using native smooth scroll on mobile for better compatibility
-        const targetY = item.getBoundingClientRect().top + window.scrollY - (window.innerHeight / 2) + 45;
         window.scrollTo({ top: targetY, behavior: 'smooth' });
         
         setTimeout(() => {
