@@ -67,6 +67,8 @@ html {
     /* scroll-behavior: smooth; -- Commented out to prevent double-scrolling conflict with custom JS luxury smooth scroll */
     scroll-padding-top: var(--nav-height);
     background-color: var(--bg-dark);
+    overflow-x: hidden;
+    width: 100%;
 }
 
 body {
@@ -74,6 +76,7 @@ body {
     background-color: var(--bg-dark);
     color: var(--text-primary);
     overflow-x: hidden;
+    width: 100%;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -3388,6 +3391,10 @@ section {
         --section-padding: 80px;
     }
 
+    .pinterest-mood-board {
+        display: none !important;
+    }
+
     .nav-container {
         display: flex;
         flex-direction: row-reverse;
@@ -3493,8 +3500,8 @@ section {
     .hero-portrait-layer {
         position: relative !important;
         top: auto !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
+        left: 0 !important;
+        transform: none !important;
         width: 100% !important;
         height: 60vh !important;
         max-height: 480px !important;
