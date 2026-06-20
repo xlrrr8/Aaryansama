@@ -20,6 +20,23 @@
 
 <body>
 
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+
+    <!-- Theme Accent Switcher -->
+    <div class="theme-switcher" id="themeSwitcher">
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Change accent color">
+            <i class="fa-solid fa-palette"></i>
+        </button>
+        <div class="theme-palette" id="themePalette">
+            <button class="theme-swatch active" data-accent="#0056ff" data-name="Electric Blue" aria-label="Electric Blue" style="--swatch:#0056ff;"></button>
+            <button class="theme-swatch" data-accent="#e07252" data-name="Terracotta" aria-label="Terracotta" style="--swatch:#e07252;"></button>
+            <button class="theme-swatch" data-accent="#4f3beb" data-name="Violet Glow" aria-label="Violet Glow" style="--swatch:#4f3beb;"></button>
+            <button class="theme-swatch" data-accent="#10b981" data-name="Emerald" aria-label="Emerald" style="--swatch:#10b981;"></button>
+            <button class="theme-swatch" data-accent="#f43f5e" data-name="Rose" aria-label="Rose" style="--swatch:#f43f5e;"></button>
+        </div>
+    </div>
+
     <!-- Ambient Glowing Spheres Background -->
     <div class="ambient-bg">
         <!-- Scroll-Driven Video Background -->
@@ -178,6 +195,108 @@
 
         <!-- Cinematic Noise Texture Overlay -->
         <div class="noise-overlay"></div>
+
+        <!-- Scroll-Animated Floating Geometric Background Elements -->
+        <div class="scroll-geo-layer" id="scrollGeoLayer">
+            <!-- Orbital Rings -->
+            <svg class="geo-shape geo-ring" data-speed="0.08" style="top:12vh; left:8%;" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="50" fill="none" stroke="currentColor" stroke-width="1" opacity="0.12" stroke-dasharray="8,6"/>
+            </svg>
+            <svg class="geo-shape geo-ring" data-speed="-0.06" style="top:55vh; right:6%;" viewBox="0 0 160 160">
+                <circle cx="80" cy="80" r="70" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.08"/>
+                <circle cx="80" cy="80" r="40" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.06" stroke-dasharray="4,8"/>
+            </svg>
+            <svg class="geo-shape geo-ring" data-speed="0.12" style="top:140vh; left:5%;" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.10" stroke-dasharray="12,4"/>
+            </svg>
+            <svg class="geo-shape geo-ring" data-speed="-0.09" style="top:280vh; right:10%;" viewBox="0 0 140 140">
+                <circle cx="70" cy="70" r="60" fill="none" stroke="currentColor" stroke-width="0.7" opacity="0.07"/>
+            </svg>
+
+            <!-- Crosses / Plus Signs -->
+            <svg class="geo-shape geo-cross" data-speed="0.10" style="top:35vh; right:14%;" viewBox="0 0 40 40">
+                <line x1="20" y1="5" x2="20" y2="35" stroke="currentColor" stroke-width="1" opacity="0.15"/>
+                <line x1="5" y1="20" x2="35" y2="20" stroke="currentColor" stroke-width="1" opacity="0.15"/>
+            </svg>
+            <svg class="geo-shape geo-cross" data-speed="-0.07" style="top:110vh; left:12%;" viewBox="0 0 30 30">
+                <line x1="15" y1="3" x2="15" y2="27" stroke="currentColor" stroke-width="0.8" opacity="0.12"/>
+                <line x1="3" y1="15" x2="27" y2="15" stroke="currentColor" stroke-width="0.8" opacity="0.12"/>
+            </svg>
+            <svg class="geo-shape geo-cross" data-speed="0.14" style="top:230vh; right:18%;" viewBox="0 0 36 36">
+                <line x1="18" y1="4" x2="18" y2="32" stroke="currentColor" stroke-width="1" opacity="0.10"/>
+                <line x1="4" y1="18" x2="32" y2="18" stroke="currentColor" stroke-width="1" opacity="0.10"/>
+            </svg>
+
+            <!-- Diamonds -->
+            <svg class="geo-shape geo-diamond" data-speed="-0.11" style="top:75vh; left:18%;" viewBox="0 0 40 40">
+                <rect x="10" y="10" width="20" height="20" transform="rotate(45 20 20)" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.10"/>
+            </svg>
+            <svg class="geo-shape geo-diamond" data-speed="0.09" style="top:190vh; right:8%;" viewBox="0 0 50 50">
+                <rect x="12" y="12" width="26" height="26" transform="rotate(45 25 25)" fill="none" stroke="currentColor" stroke-width="1" opacity="0.08"/>
+            </svg>
+            <svg class="geo-shape geo-diamond" data-speed="-0.13" style="top:340vh; left:14%;" viewBox="0 0 35 35">
+                <rect x="8" y="8" width="19" height="19" transform="rotate(45 17.5 17.5)" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.12"/>
+            </svg>
+
+            <!-- Code Brackets -->
+            <svg class="geo-shape geo-bracket" data-speed="0.07" style="top:160vh; right:16%;" viewBox="0 0 30 60">
+                <path d="M 22 5 L 8 30 L 22 55" fill="none" stroke="currentColor" stroke-width="1" opacity="0.10" stroke-linecap="round"/>
+            </svg>
+            <svg class="geo-shape geo-bracket" data-speed="-0.08" style="top:300vh; left:10%;" viewBox="0 0 30 60">
+                <path d="M 8 5 L 22 30 L 8 55" fill="none" stroke="currentColor" stroke-width="1" opacity="0.10" stroke-linecap="round"/>
+            </svg>
+
+            <!-- Dot Clusters -->
+            <svg class="geo-shape geo-dots" data-speed="0.06" style="top:95vh; left:4%;" viewBox="0 0 60 60">
+                <circle cx="10" cy="10" r="2" fill="currentColor" opacity="0.12"/>
+                <circle cx="30" cy="10" r="2" fill="currentColor" opacity="0.08"/>
+                <circle cx="50" cy="10" r="2" fill="currentColor" opacity="0.12"/>
+                <circle cx="10" cy="30" r="2" fill="currentColor" opacity="0.08"/>
+                <circle cx="30" cy="30" r="2" fill="currentColor" opacity="0.14"/>
+                <circle cx="50" cy="30" r="2" fill="currentColor" opacity="0.08"/>
+                <circle cx="10" cy="50" r="2" fill="currentColor" opacity="0.12"/>
+                <circle cx="30" cy="50" r="2" fill="currentColor" opacity="0.08"/>
+                <circle cx="50" cy="50" r="2" fill="currentColor" opacity="0.12"/>
+            </svg>
+            <svg class="geo-shape geo-dots" data-speed="-0.05" style="top:250vh; right:5%;" viewBox="0 0 50 50">
+                <circle cx="10" cy="10" r="1.5" fill="currentColor" opacity="0.10"/>
+                <circle cx="25" cy="10" r="1.5" fill="currentColor" opacity="0.07"/>
+                <circle cx="40" cy="10" r="1.5" fill="currentColor" opacity="0.10"/>
+                <circle cx="10" cy="25" r="1.5" fill="currentColor" opacity="0.07"/>
+                <circle cx="25" cy="25" r="1.5" fill="currentColor" opacity="0.12"/>
+                <circle cx="40" cy="25" r="1.5" fill="currentColor" opacity="0.07"/>
+                <circle cx="10" cy="40" r="1.5" fill="currentColor" opacity="0.10"/>
+                <circle cx="25" cy="40" r="1.5" fill="currentColor" opacity="0.07"/>
+                <circle cx="40" cy="40" r="1.5" fill="currentColor" opacity="0.10"/>
+            </svg>
+
+            <!-- Thin Lines / Slashes -->
+            <svg class="geo-shape geo-line" data-speed="0.11" style="top:45vh; left:22%;" viewBox="0 0 80 4">
+                <line x1="0" y1="2" x2="80" y2="2" stroke="currentColor" stroke-width="0.8" opacity="0.08" stroke-dasharray="6,10"/>
+            </svg>
+            <svg class="geo-shape geo-line" data-speed="-0.10" style="top:200vh; right:20%;" viewBox="0 0 100 4">
+                <line x1="0" y1="2" x2="100" y2="2" stroke="currentColor" stroke-width="0.6" opacity="0.06" stroke-dasharray="4,12"/>
+            </svg>
+            <svg class="geo-shape geo-line" data-speed="0.08" style="top:360vh; left:20%;" viewBox="0 0 70 4">
+                <line x1="0" y1="2" x2="70" y2="2" stroke="currentColor" stroke-width="1" opacity="0.09" stroke-dasharray="8,8"/>
+            </svg>
+
+            <!-- Triangle Outlines -->
+            <svg class="geo-shape geo-triangle" data-speed="-0.12" style="top:125vh; right:22%;" viewBox="0 0 50 50">
+                <polygon points="25,5 45,42 5,42" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.08"/>
+            </svg>
+            <svg class="geo-shape geo-triangle" data-speed="0.10" style="top:380vh; left:8%;" viewBox="0 0 60 60">
+                <polygon points="30,8 52,50 8,50" fill="none" stroke="currentColor" stroke-width="1" opacity="0.10"/>
+            </svg>
+
+            <!-- Arc Segments -->
+            <svg class="geo-shape geo-arc" data-speed="0.13" style="top:170vh; left:25%;" viewBox="0 0 80 80">
+                <path d="M 15 65 A 40 40 0 0 1 65 15" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.09" stroke-linecap="round"/>
+            </svg>
+            <svg class="geo-shape geo-arc" data-speed="-0.07" style="top:310vh; right:15%;" viewBox="0 0 70 70">
+                <path d="M 10 55 A 35 35 0 0 1 60 10" fill="none" stroke="currentColor" stroke-width="1" opacity="0.11" stroke-linecap="round"/>
+            </svg>
+        </div>
     </div>
 
     <!-- Header & Navigation -->
@@ -197,6 +316,12 @@
                 <a href="#interests" class="nav-pill" id="pill-interests">Interests</a>
                 <a href="#contact" class="nav-pill" id="pill-contact">Contact</a>
             </nav>
+
+            <!-- Resume CTA Button -->
+            <a href="resume.pdf" class="nav-resume-btn" id="nav-resume-btn" target="_blank" rel="noopener noreferrer">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                <span>Resume</span>
+            </a>
 
 
             <!-- Mobile Toggle Menu Button -->
@@ -245,9 +370,9 @@
                         I blend <span class="hide-mobile">structured </span>engineering with <span class="hide-mobile">visual storytelling </span><span class="show-mobile">design </span>to build immersive, responsive web experiences.<span class="hide-mobile"> Specializing in AI/ML integration and minimalist UI/UX design.</span>
                     </p>
                     <div class="hero-cta">
-                        <a href="resume.pdf" class="hero-resume-btn" download>
-                            <i class="fa-solid fa-download"></i>
-                            <span>Download Resume</span>
+                        <a href="resume.pdf" class="hero-resume-btn" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            <span>View Resume</span>
                         </a>
                         <a href="#projects" class="hero-projects-btn">
                             <i class="fa-solid fa-briefcase"></i>
@@ -396,6 +521,33 @@
                         </div>
                     </div>
 
+                    <!-- Languages I Speak -->
+                    <div class="about-languages">
+                        <h4 class="about-languages-title"><i class="fa-solid fa-language"></i> Languages I Speak</h4>
+                        <div class="about-languages-grid">
+                            <div class="about-lang-item">
+                                <span class="about-lang-name">English</span>
+                                <span class="about-lang-bar fluent"></span>
+                                <span class="about-lang-level">Fluent</span>
+                            </div>
+                            <div class="about-lang-item">
+                                <span class="about-lang-name">Kannada</span>
+                                <span class="about-lang-bar native"></span>
+                                <span class="about-lang-level">Native</span>
+                            </div>
+                            <div class="about-lang-item">
+                                <span class="about-lang-name">Hindi</span>
+                                <span class="about-lang-bar fluent"></span>
+                                <span class="about-lang-level">Fluent</span>
+                            </div>
+                            <div class="about-lang-item">
+                                <span class="about-lang-name">Telugu</span>
+                                <span class="about-lang-bar fluent"></span>
+                                <span class="about-lang-level">Fluent</span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -412,50 +564,64 @@
                 </div>
 
                 <div class="skills-grid">
-                    <!-- Category 1 -->
+                    <!-- Category 1: Programming Languages -->
                     <div class="skills-card">
                         <div class="skills-header">
                             <i class="fa-solid fa-code"></i>
-                            <h3>Programming</h3>
+                            <h3>Programming Languages</h3>
                         </div>
                         <div class="skills-tags">
                             <span class="skill-tag">Python</span>
+                            <span class="skill-tag">C</span>
                             <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">C Language</span>
                         </div>
                     </div>
 
-                    <!-- Category 2 -->
+                    <!-- Category 2: Web Development -->
                     <div class="skills-card">
                         <div class="skills-header">
                             <i class="fa-solid fa-globe"></i>
-                            <h3>Web Dev</h3>
+                            <h3>Web Development</h3>
                         </div>
                         <div class="skills-tags">
-                            <span class="skill-tag">HTML5 / CSS3</span>
-                            <span class="skill-tag">React.js</span>
+                            <span class="skill-tag">HTML</span>
+                            <span class="skill-tag">CSS</span>
+                            <span class="skill-tag">React</span>
                             <span class="skill-tag">Node.js</span>
                             <span class="skill-tag">Django</span>
                         </div>
                     </div>
 
-                    <!-- Category 3 -->
+                    <!-- Category 3: Databases -->
                     <div class="skills-card">
                         <div class="skills-header">
                             <i class="fa-solid fa-database"></i>
-                            <h3>Databases & Cloud</h3>
+                            <h3>Databases</h3>
                         </div>
                         <div class="skills-tags">
-                            <span class="skill-tag">SQL</span>
-                            <span class="skill-tag">Google Cloud</span>
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">MongoDB</span>
                         </div>
                     </div>
 
-                    <!-- Category 4 -->
+                    <!-- Category 4: Cloud Platforms -->
+                    <div class="skills-card">
+                        <div class="skills-header">
+                            <i class="fa-solid fa-cloud"></i>
+                            <h3>Cloud Platforms</h3>
+                        </div>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Google Cloud</span>
+                            <span class="skill-tag">Firebase</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 5: UI/UX & Design -->
                     <div class="skills-card">
                         <div class="skills-header">
                             <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            <h3>Design & Prototyping</h3>
+                            <h3>UI/UX & Design</h3>
                         </div>
                         <div class="skills-tags">
                             <span class="skill-tag">Figma</span>
@@ -464,28 +630,41 @@
                         </div>
                     </div>
 
-                    <!-- Category 5 -->
+                    <!-- Category 6: Version Control -->
                     <div class="skills-card">
                         <div class="skills-header">
-                            <i class="fa-solid fa-toolbox"></i>
-                            <h3>Tools & Platforms</h3>
+                            <i class="fa-solid fa-code-branch"></i>
+                            <h3>Version Control</h3>
                         </div>
                         <div class="skills-tags">
-                            <span class="skill-tag">Git & GitHub</span>
-                            <span class="skill-tag">LLMs & Prompting</span>
-                            <span class="skill-tag">Bolt.new</span>
-                            <span class="skill-tag">MAS</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">GitHub</span>
                         </div>
                     </div>
 
-                    <!-- Category 6 -->
+                    <!-- Category 7: Tools -->
+                    <div class="skills-card">
+                        <div class="skills-header">
+                            <i class="fa-solid fa-toolbox"></i>
+                            <h3>Tools</h3>
+                        </div>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Bolt</span>
+                            <span class="skill-tag">Replit</span>
+                            <span class="skill-tag">Antigravity</span>
+                            <span class="skill-tag">Claude</span>
+                            <span class="skill-tag">Higgsfield</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 8: Operating Systems -->
                     <div class="skills-card">
                         <div class="skills-header">
                             <i class="fa-solid fa-display"></i>
-                            <h3>Environments</h3>
+                            <h3>Operating Systems</h3>
                         </div>
                         <div class="skills-tags">
-                            <span class="skill-tag">Windows Server</span>
+                            <span class="skill-tag">Windows</span>
                             <span class="skill-tag">macOS</span>
                         </div>
                     </div>
@@ -500,9 +679,19 @@
             <div class="liquid-glass-blob blob-projects-2"></div>
             <div class="liquid-glass-blob blob-projects-3"></div>
             <div class="section-container">
-                <div class="section-header">
-                    <span class="tagline">// CREATIVE WORKS</span>
-                    <h2 class="section-title">Featured Projects</h2>
+                <div class="projects-header-row">
+                    <div class="section-header">
+                        <span class="tagline">// CREATIVE WORKS</span>
+                        <h2 class="section-title">Featured Projects</h2>
+                    </div>
+                    <div class="projects-nav-controls" id="projectsNavControls">
+                        <button class="proj-nav-btn" id="projPrev" aria-label="Previous projects">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button class="proj-nav-btn" id="projNext" aria-label="Next projects">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="projects-accordion">
@@ -784,6 +973,8 @@
                         <div class="social-links">
                             <a href="https://github.com/xlrrr8" target="_blank" aria-label="GitHub"><i
                                     class="fa-brands fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/aaryan-ningdhalli/" target="_blank" aria-label="LinkedIn"><i
+                                    class="fa-brands fa-linkedin"></i></a>
                             <a href="https://www.instagram.com/iem.aaryan" target="_blank" aria-label="Instagram"><i
                                     class="fa-brands fa-instagram"></i></a>
                             <a href="https://in.pinterest.com/itztogi/_pins/" target="_blank" aria-label="Pinterest"><i
@@ -794,19 +985,23 @@
                     </div>
 
                     <div class="contact-form-container">
-                        <form class="contact-form" id="contactForm">
+                        <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                            <input type="hidden" name="subject" value="New message from Aaryan Sama Portfolio">
+                            <input type="hidden" name="from_name" value="Portfolio Contact Form">
+                            <input type="checkbox" name="botcheck" class="hidden" style="display:none">
                             <div class="form-row">
                                 <div class="form-group">
-                                    <input type="text" id="name" required placeholder=" " autocomplete="name">
+                                    <input type="text" name="name" id="name" required placeholder=" " autocomplete="name">
                                     <label for="name">Your Name</label>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" id="email" required placeholder=" " autocomplete="email">
+                                    <input type="email" name="email" id="email" required placeholder=" " autocomplete="email">
                                     <label for="email">Your Email</label>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <textarea id="message" rows="5" required placeholder=" "></textarea>
+                                <textarea name="message" id="message" rows="5" required placeholder=" "></textarea>
                                 <label for="message">Your Message</label>
                             </div>
                             <button type="submit" class="submit-btn" id="submitBtn">

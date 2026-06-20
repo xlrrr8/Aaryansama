@@ -55,10 +55,14 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollParallaxPins();
     initProjectsAccordion(); // Initialize premium expanding cards swiper!
     initProjectsSlider(); // Initialize sliding window pagination for project cards!
+    initProjectNavArrows(); // Initialize explicit chevron arrow navigation!
     initInterestsAccordion(); // Initialize interests expanding cards swiper!
     initScrollVideo(); // Scroll-driven video background
     initRotatingText(); // Fade-reveal rotating tagline
     initMobileScrollAccordion(); // Initialize scrolling vertical card maximization on mobile!
+    initScrollProgress(); // Scroll progress indicator bar
+    initThemeSwitcher(); // Dynamic accent color switcher
+    initScrollGeoParallax(); // Scroll-animated floating geometric background
 });
 
 /* ==========================================================================
@@ -259,22 +263,41 @@ function initContactForm() {
         const originalBtnText = submitBtn.innerHTML;
         submitBtn.innerHTML = `<span>Sending...</span> <i class="fa-solid fa-spinner fa-spin"></i>`;
         
-        // Simulate premium asynchronous mail delivery
-        setTimeout(() => {
+        // Submit via Web3Forms API
+        const formData = new FormData(form);
+        
+        fetch(form.action, {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
             submitBtn.disabled = false;
             submitBtn.innerHTML = originalBtnText;
             
-            // Success response
-            showFeedback(`Thank you, ${nameVal}! Your message has been received.`, 'success');
-            form.reset();
+            if (data.success) {
+                showFeedback(`Thank you, ${nameVal}! Your message has been sent successfully.`, 'success');
+                form.reset();
+            } else {
+                showFeedback('Something went wrong. Please try again later.', 'error');
+            }
             
             // Clear feedback after 5 seconds
             setTimeout(() => {
                 feedback.classList.add('hidden');
                 feedback.className = 'form-feedback hidden';
             }, 5000);
+        })
+        .catch(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+            showFeedback('Network error. Please check your connection and try again.', 'error');
             
-        }, 1800);
+            setTimeout(() => {
+                feedback.classList.add('hidden');
+                feedback.className = 'form-feedback hidden';
+            }, 5000);
+        });
     });
     
     function showFeedback(msg, type) {
@@ -868,7 +891,7 @@ function initProjectsAccordion() {
 }
 
 /* ==========================================================================
-   PROJECTS SLIDER PAGINATION ENGINE (4 CARDS VISIBLE WINDOW)
+   PROJECTS SLIDER INITIAL VISIBILITY (Arrow navigation in initProjectNavArrows)
    ========================================================================== */
 function initProjectsSlider() {
     const accordion = document.querySelector('.projects-accordion');
@@ -877,52 +900,7 @@ function initProjectsSlider() {
     const items = accordion.querySelectorAll('.accordion-item');
     if (items.length <= 4) return;
 
-    let startIndex = 0;
-    const maxStartIndex = items.length - 4; // 6 - 4 = 2
-
-    const updateSlider = (newStartIndex) => {
-        if (newStartIndex === startIndex) return;
-        startIndex = newStartIndex;
-
-        items.forEach((item, index) => {
-            if (index >= startIndex && index < startIndex + 4) {
-                item.classList.remove('hidden-card');
-            } else {
-                item.classList.add('hidden-card');
-                // Deactivate the hidden card if it was active
-                if (item.classList.contains('active')) {
-                    item.classList.remove('active');
-                }
-            }
-        });
-
-        // Ensure at least one visible card is active (expanded)
-        const activeItem = accordion.querySelector('.accordion-item.active:not(.hidden-card)');
-        if (!activeItem) {
-            items[startIndex].classList.add('active');
-        }
-    };
-
-    // Track mouse movement across the projects container to shift visible window
-    accordion.addEventListener('mousemove', (e) => {
-        if (window.innerWidth <= 820) return; // Responsive vertical stack on mobile
-
-        const rect = accordion.getBoundingClientRect();
-        const relativeX = e.clientX - rect.left;
-        const pct = Math.max(0, Math.min(1, relativeX / rect.width));
-
-        // Map mouse position to 3 zones (Zone 0: Left, Zone 1: Center, Zone 2: Right)
-        let targetIndex = 0;
-        if (pct >= 0.35 && pct < 0.65) {
-            targetIndex = 1;
-        } else if (pct >= 0.65) {
-            targetIndex = 2;
-        }
-
-        updateSlider(targetIndex);
-    });
-
-    // Initialize state showing first 4 cards
+    // Initialize state showing first 4 cards, hide the rest
     items.forEach((item, index) => {
         if (index >= 4) {
             item.classList.add('hidden-card');
@@ -1169,3 +1147,231 @@ function initMobileScrollAccordion() {
     setTimeout(handleScroll, 100);
 }
 
+/* ==========================================================================
+   SCROLL PROGRESS INDICATOR
+   ========================================================================== */
+function initScrollProgress() {
+    const progressBar = document.getElementById('scrollProgressBar');
+    if (!progressBar) return;
+
+    const updateProgress = () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        progressBar.style.width = scrollPercent + '%';
+    };
+
+    // Use Lenis scroll if available for buttery sync
+    if (typeof lenis !== 'undefined' && lenis) {
+        lenis.on('scroll', updateProgress);
+    } else {
+        window.addEventListener('scroll', updateProgress, { passive: true });
+    }
+
+    updateProgress();
+}
+
+/* ==========================================================================
+   THEME ACCENT SWITCHER (Dynamic CSS Variable Override)
+   ========================================================================== */
+function initThemeSwitcher() {
+    const toggleBtn = document.getElementById('themeToggleBtn');
+    const palette = document.getElementById('themePalette');
+    const swatches = document.querySelectorAll('.theme-swatch');
+
+    if (!toggleBtn || !palette || swatches.length === 0) return;
+
+    // Toggle palette visibility
+    toggleBtn.addEventListener('click', () => {
+        toggleBtn.classList.toggle('active');
+        palette.classList.toggle('open');
+    });
+
+    // Close palette when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.theme-switcher')) {
+            toggleBtn.classList.remove('active');
+            palette.classList.remove('open');
+        }
+    });
+
+    // Helper: Convert hex to rgba string
+    const hexToRgba = (hex, alpha) => {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    };
+
+    // Apply theme accent
+    const applyTheme = (accentHex) => {
+        const root = document.documentElement;
+
+        // Core accent color
+        root.style.setProperty('--color-electric-blue', accentHex);
+
+        // Derived darker shade for secondary usage
+        const r = parseInt(accentHex.slice(1, 3), 16);
+        const g = parseInt(accentHex.slice(3, 5), 16);
+        const b = parseInt(accentHex.slice(5, 7), 16);
+        const darkerHex = '#' + 
+            Math.max(0, Math.floor(r * 0.5)).toString(16).padStart(2, '0') +
+            Math.max(0, Math.floor(g * 0.5)).toString(16).padStart(2, '0') +
+            Math.max(0, Math.floor(b * 0.5)).toString(16).padStart(2, '0');
+        root.style.setProperty('--color-slate-blue', darkerHex);
+
+        // Update glow variables
+        root.style.setProperty('--glow-blue', `0 0 40px ${hexToRgba(accentHex, 0.35)}`);
+
+        // Update border glass glow
+        root.style.setProperty('--border-glass-glow', hexToRgba(accentHex, 0.25));
+
+        // Update nav indicator styles dynamically
+        const indicator = document.querySelector('.nav-indicator');
+        if (indicator) {
+            indicator.style.background = hexToRgba(accentHex, 0.14);
+            indicator.style.borderColor = hexToRgba(accentHex, 0.30);
+            indicator.style.boxShadow = `inset 0 1px 1px rgba(255,255,255,0.12), 0 0 16px ${hexToRgba(accentHex, 0.25)}`;
+        }
+
+        // Update scroll progress bar gradient
+        const progressBar = document.getElementById('scrollProgressBar');
+        if (progressBar) {
+            progressBar.style.background = `linear-gradient(90deg, ${accentHex} 0%, var(--color-violet-glow) 50%, #00f0ff 100%)`;
+            progressBar.style.boxShadow = `0 0 8px ${accentHex}, 0 0 18px ${hexToRgba(accentHex, 0.4)}`;
+        }
+    };
+
+    swatches.forEach(swatch => {
+        swatch.addEventListener('click', () => {
+            const accent = swatch.dataset.accent;
+
+            // Update active state
+            swatches.forEach(s => s.classList.remove('active'));
+            swatch.classList.add('active');
+
+            // Apply the theme
+            applyTheme(accent);
+
+            // Store preference
+            localStorage.setItem('portfolio-accent', accent);
+
+            // Close palette
+            setTimeout(() => {
+                toggleBtn.classList.remove('active');
+                palette.classList.remove('open');
+            }, 350);
+        });
+    });
+
+    // Restore saved accent on load
+    const savedAccent = localStorage.getItem('portfolio-accent');
+    if (savedAccent) {
+        const matchingSwatch = document.querySelector(`.theme-swatch[data-accent="${savedAccent}"]`);
+        if (matchingSwatch) {
+            swatches.forEach(s => s.classList.remove('active'));
+            matchingSwatch.classList.add('active');
+            applyTheme(savedAccent);
+        }
+    }
+}
+
+/* ==========================================================================
+   PROJECT SLIDER EXPLICIT ARROW NAVIGATION
+   ========================================================================== */
+function initProjectNavArrows() {
+    const accordion = document.querySelector('.projects-accordion');
+    const prevBtn = document.getElementById('projPrev');
+    const nextBtn = document.getElementById('projNext');
+
+    if (!accordion || !prevBtn || !nextBtn) return;
+
+    const items = accordion.querySelectorAll('.accordion-item');
+    if (items.length <= 4) {
+        // Not enough cards to paginate — hide arrows
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+        return;
+    }
+
+    let startIndex = 0;
+    const windowSize = 4;
+    const maxStartIndex = items.length - windowSize;
+
+    const updateArrowStates = () => {
+        prevBtn.disabled = startIndex <= 0;
+        nextBtn.disabled = startIndex >= maxStartIndex;
+    };
+
+    const updateSlider = (newStartIndex) => {
+        startIndex = Math.max(0, Math.min(maxStartIndex, newStartIndex));
+
+        items.forEach((item, index) => {
+            if (index >= startIndex && index < startIndex + windowSize) {
+                item.classList.remove('hidden-card');
+            } else {
+                item.classList.add('hidden-card');
+                if (item.classList.contains('active')) {
+                    item.classList.remove('active');
+                }
+            }
+        });
+
+        // Ensure at least one visible card is active
+        const activeItem = accordion.querySelector('.accordion-item.active:not(.hidden-card)');
+        if (!activeItem) {
+            items[startIndex].classList.add('active');
+        }
+
+        updateArrowStates();
+    };
+
+    prevBtn.addEventListener('click', () => {
+        if (window.innerWidth <= 820) return;
+        updateSlider(startIndex - 1);
+    });
+
+    nextBtn.addEventListener('click', () => {
+        if (window.innerWidth <= 820) return;
+        updateSlider(startIndex + 1);
+    });
+
+    updateArrowStates();
+}
+
+/* ==========================================================================
+   SCROLL-ANIMATED GEOMETRIC BACKGROUND PARALLAX
+   ========================================================================== */
+function initScrollGeoParallax() {
+    const shapes = document.querySelectorAll('.geo-shape');
+    if (!shapes.length) return;
+
+    // Pre-calculate initial top offsets for each shape
+    const shapeData = Array.from(shapes).map(el => {
+        const speed = parseFloat(el.dataset.speed) || 0.05;
+        // Get the initial top position from the inline style
+        const style = el.style;
+        const top = parseFloat(style.top) || 0;
+        return { el, speed, initialTop: top };
+    });
+
+    const updateParallax = () => {
+        const scrollY = window.scrollY;
+
+        shapeData.forEach(({ el, speed }) => {
+            const yOffset = scrollY * speed;
+            const rotation = scrollY * speed * 0.3;
+            el.style.transform = `translateY(${yOffset}px) rotate(${rotation}deg)`;
+        });
+    };
+
+    // Sync with Lenis for buttery smoothness, fallback to native scroll
+    if (typeof lenis !== 'undefined' && lenis) {
+        lenis.on('scroll', updateParallax);
+    } else {
+        window.addEventListener('scroll', updateParallax, { passive: true });
+    }
+
+    // Initial render
+    updateParallax();
+}
