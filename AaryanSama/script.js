@@ -54,8 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollParallax();
     initScrollParallaxPins();
     initProjectsAccordion(); // Initialize premium expanding cards swiper!
-    initProjectsSlider(); // Initialize sliding window pagination for project cards!
-    initProjectNavArrows(); // Initialize explicit chevron arrow navigation!
     initInterestsAccordion(); // Initialize interests expanding cards swiper!
     initScrollVideo(); // Scroll-driven video background
     initRotatingText(); // Fade-reveal rotating tagline
@@ -890,23 +888,6 @@ function initProjectsAccordion() {
     });
 }
 
-/* ==========================================================================
-   PROJECTS SLIDER INITIAL VISIBILITY (Arrow navigation in initProjectNavArrows)
-   ========================================================================== */
-function initProjectsSlider() {
-    const accordion = document.querySelector('.projects-accordion');
-    if (!accordion) return;
-
-    const items = accordion.querySelectorAll('.accordion-item');
-    if (items.length <= 4) return;
-
-    // Initialize state showing first 4 cards, hide the rest
-    items.forEach((item, index) => {
-        if (index >= 4) {
-            item.classList.add('hidden-card');
-        }
-    });
-}
 
 /* ==========================================================================
    PREMIUM DYNAMIC HORIZONTAL INTERESTS ACCORDION SWIPER
@@ -1276,68 +1257,6 @@ function initThemeSwitcher() {
     }
 }
 
-/* ==========================================================================
-   PROJECT SLIDER EXPLICIT ARROW NAVIGATION
-   ========================================================================== */
-function initProjectNavArrows() {
-    const accordion = document.querySelector('.projects-accordion');
-    const prevBtn = document.getElementById('projPrev');
-    const nextBtn = document.getElementById('projNext');
-
-    if (!accordion || !prevBtn || !nextBtn) return;
-
-    const items = accordion.querySelectorAll('.accordion-item');
-    if (items.length <= 4) {
-        // Not enough cards to paginate — hide arrows
-        prevBtn.style.display = 'none';
-        nextBtn.style.display = 'none';
-        return;
-    }
-
-    let startIndex = 0;
-    const windowSize = 4;
-    const maxStartIndex = items.length - windowSize;
-
-    const updateArrowStates = () => {
-        prevBtn.disabled = startIndex <= 0;
-        nextBtn.disabled = startIndex >= maxStartIndex;
-    };
-
-    const updateSlider = (newStartIndex) => {
-        startIndex = Math.max(0, Math.min(maxStartIndex, newStartIndex));
-
-        items.forEach((item, index) => {
-            if (index >= startIndex && index < startIndex + windowSize) {
-                item.classList.remove('hidden-card');
-            } else {
-                item.classList.add('hidden-card');
-                if (item.classList.contains('active')) {
-                    item.classList.remove('active');
-                }
-            }
-        });
-
-        // Ensure at least one visible card is active
-        const activeItem = accordion.querySelector('.accordion-item.active:not(.hidden-card)');
-        if (!activeItem) {
-            items[startIndex].classList.add('active');
-        }
-
-        updateArrowStates();
-    };
-
-    prevBtn.addEventListener('click', () => {
-        if (window.innerWidth <= 820) return;
-        updateSlider(startIndex - 1);
-    });
-
-    nextBtn.addEventListener('click', () => {
-        if (window.innerWidth <= 820) return;
-        updateSlider(startIndex + 1);
-    });
-
-    updateArrowStates();
-}
 
 /* ==========================================================================
    SCROLL-ANIMATED GEOMETRIC BACKGROUND PARALLAX
